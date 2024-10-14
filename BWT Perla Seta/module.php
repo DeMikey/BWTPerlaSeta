@@ -294,57 +294,57 @@ declare(strict_types=1);
 		
 			if (!IPS_VariableProfileExists('BWTPerla_l')) {
 				IPS_CreateVariableProfile('BWTPerla_l', 1);
-				IPS_SetVariableProfileText('BWTPerla_l', 'l');
+				IPS_SetVariableProfileText('BWTPerla_l', '', 'l');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_ml*°dH')) {
 				IPS_CreateVariableProfile('BWTPerla_ml*°dH', 1);
-				IPS_SetVariableProfileText('BWTPerla_ml*°dH', 'ml*°dH');
+				IPS_SetVariableProfileText('BWTPerla_ml*°dH', '', 'ml*°dH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_l/h')) {
 				IPS_CreateVariableProfile('BWTPerla_l/h', 1);
-				IPS_SetVariableProfileText('BWTPerla_l/h', 'l/h');
+				IPS_SetVariableProfileText('BWTPerla_l/h', '', 'l/h');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_ml')) {
 				IPS_CreateVariableProfile('BWTPerla_ml', 1);
-				IPS_SetVariableProfileText('BWTPerla_ml', 'ml');
+				IPS_SetVariableProfileText('BWTPerla_ml', '', 'ml');
 			}
 	
 			if (!IPS_VariableProfileExists('BWTPerla_ppm CaCO3')) {
 				IPS_CreateVariableProfile('BWTPerla_ppm CaCO3', 1);
-				IPS_SetVariableProfileText('BWTPerla_ppm CaCO3', 'ppm CaCO3');
+				IPS_SetVariableProfileText('BWTPerla_ppm CaCO3', '', 'ppm CaCO3');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_dH')) {
 				IPS_CreateVariableProfile('BWTPerla_dH', 1);
-				IPS_SetVariableProfileText('BWTPerla_dH', '°dH');
+				IPS_SetVariableProfileText('BWTPerla_dH', '', '°dH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_fH')) {
 				IPS_CreateVariableProfile('BWTPerla_fH', 1);
-				IPS_SetVariableProfileText('BWTPerla_fH', '°fH');
+				IPS_SetVariableProfileText('BWTPerla_fH', '', '°fH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_mmol/l')) {
 				IPS_CreateVariableProfile('BWTPerla_mmol/l', 1);
-				IPS_SetVariableProfileText('BWTPerla_mmol/l', 'mmol/l');
+				IPS_SetVariableProfileText('BWTPerla_mmol/l', '', 'mmol/l');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Tage')) {
 				IPS_CreateVariableProfile('BWTPerla_TAge', 1);
-				IPS_SetVariableProfileText('BWTPerla_Tage', 'Tage');
+				IPS_SetVariableProfileText('BWTPerla_Tage', '', 'Tage');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Prozent')) {
 				IPS_CreateVariableProfile('BWTPerla_Prozent', 1);
-				IPS_SetVariableProfileText('BWTPerla_Prozent', '%');
+				IPS_SetVariableProfileText('BWTPerla_Prozent', '', '%');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Gramm')) {
 				IPS_CreateVariableProfile('BWTPerla_Gramm', 1);
-				IPS_SetVariableProfileText('BWTPerla_Gramm', 'g');
+				IPS_SetVariableProfileText('BWTPerla_Gramm', '', 'g');
 			}
 		}		
 
