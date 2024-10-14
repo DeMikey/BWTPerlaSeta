@@ -77,7 +77,7 @@
         {
             "type": "Button",
             "label": "Check Connection",
-            "onClick": "BWTSeta_Update($id);"
+            "onClick": "BWTPerla_Update($id);"
         }
     ],
     "status":
@@ -85,7 +85,7 @@
         {
             "code": 102, 
             "icon": "active",
-            "caption": "Robonect identified"
+            "caption": "BWT Perla Seta identified"
         },
         {
             "code": 200,
@@ -110,7 +110,7 @@
         {
             "code": 204,
             "icon": "error",
-            "caption": "No Robonect available at IP"
+            "caption": "No Perla Seta available at IP"
         }
     ]
 }
