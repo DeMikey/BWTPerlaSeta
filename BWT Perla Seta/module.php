@@ -56,6 +56,8 @@ declare(strict_types=1);
 	
 			// HTTP status request
 			$data = $this->SendHTTPCommand('GetCurrentData');
+			$this->log('Empfangene Daten:');
+			$this->log($data);
 			if ($data == false) {
 				IPS_SemaphoreLeave($semaphore);
 				$this->log('Update - Keine Daten empfangen');
