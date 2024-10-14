@@ -63,7 +63,7 @@ declare(strict_types=1);
 				$this->log('Update - Keine Daten empfangen');
 				$this->log('Update - Semaphore leaved');
 				return false;
-			} elseif (isset($data['successful'])) {
+			} else {
 				// set values to variables
 	
 				//--- Identification
