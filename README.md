@@ -1,2 +1,6 @@
-# BWT_Perla_Seta
-IPS Symcon Modul für BWT Perla Seta
+# BWT Perla Seta
+
+Folgende Module beinhaltet das BWT Perla Seta Repository:
+
+- __BWT Perla Seta__ ([Dokumentation](BWT%20Perla%20Seta))  
+	Kurze Beschreibung des Moduls.
