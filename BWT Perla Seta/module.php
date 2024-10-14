@@ -55,7 +55,7 @@ declare(strict_types=1);
 			$this->log('Update - Semaphore entered');
 	
 			// HTTP status request
-			$data = $this->SendHTTPCommand('status');
+			$data = $this->SendHTTPCommand('GetCurrentData');
 			if ($data == false) {
 				IPS_SemaphoreLeave($semaphore);
 				$this->log('Update - Keine Daten empfangen');
@@ -100,24 +100,20 @@ declare(strict_types=1);
 			}
 	
 			// Get Health Data
-			$data = $this->executeHTTPCommand('health');
+			$data = $this->SendHTTPCommand('GetDailyData');
 			if ($data == false) {
 				return false;
 			} elseif (isset($data['successful'])) {#
-				$this->updateIdent("mowerVoltageInternal", $data['health']['voltages']['int3v3']/1000);
-				$this->updateIdent("mowerVoltageExternal", $data['health']['voltages']['ext3v3']);
-				$this->updateIdent("mowerVoltageBattery", $data['health']['voltages']['batt']/1000);
+//				$this->updateIdent("mowerVoltageInternal", $data['health']['voltages']['int3v3']/1000);
+//				$this->updateIdent("mowerVoltageExternal", $data['health']['voltages']['ext3v3']);
+//				$this->updateIdent("mowerVoltageBattery", $data['health']['voltages']['batt']/1000);
 			}
 	
 			// Set Timer
 			if ($this->ReadPropertyBoolean("HTTPUpdateTimer") and $this->ReadPropertyInteger("UpdateTimer") >= 10) {
-				$this->SetTimerInterval("ROBONECT_UpdateTimer", $this->ReadPropertyInteger("UpdateTimer")*1000);
+				$this->SetTimerInterval("BWTPerla_UpdateTimer", $this->ReadPropertyInteger("UpdateTimer")*1000);
 			} else {
-				$this->SetTimerInterval("ROBONECT_UpdateTimer", 0);
-			}
-	
-			if ($this->ReadPropertyBoolean("CameraInstalled")) {
-				$this->SetTimerInterval("ROBONECT_UpdateImageTimer", 60000, $this->UpdateImage());
+				$this->SetTimerInterval("BWTPerla_UpdateTimer", 0);
 			}
 	
 			IPS_SemaphoreLeave($semaphore);
@@ -191,7 +187,8 @@ declare(strict_types=1);
 
     	#================================================================================================
 		protected function log( string $text ) {
-        	if ( $this->ReadPropertyBoolean("DebugLog") ) {
+    	#================================================================================================
+		if ( $this->ReadPropertyBoolean("DebugLog") ) {
             	$this->SendDebug( "BWT Perla", $text, 0 );
         	};
     	}

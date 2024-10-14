@@ -1,13 +1,14 @@
 {
     "translations": {
         "de": {
-            "Disclaimer": "Dieses Modul wurde unabhängig vom Hersteller des Robonect Moduls entwickelt. Die Benutzung des Moduls erfolgt auf eigene Gefahr unter Ausschluss jeglicher Gewährleistung für Probleme oder Schäden am Robonect Modul.",
+            "Disclaimer": "Dieses Modul wurde unabhängig vom Hersteller BWT entwickelt. Die Benutzung des Moduls erfolgt auf eigene Gefahr unter Ausschluss jeglicher Gewährleistung für Probleme oder Schäden an BWT Perla Seta.",
 
-            "Login": "Login Daten des Robonect Moduls (benötigt zum Lesen sowie zur Steuerung)",
+            "Login": "Login Daten der BWT Perla Seta (diese werden benötigt zum Lesen der Daten)",
             "Username": "Benutzername",
             "Password": "Passwort",
  
-            "AutomaticUpdate": "Automatische Updates (bei MQTT-Nutzung sollte das Intervall höher sein, aber MQTT liefert nicht alles!)",
+            "AutomaticUpdateText": "Automatische Updates liest in regelmässigen Abständen die Daten der BWT Perla Seta.",
+            "AutomaticUpdate": "Automatische Updates",
             "UpdateTimer": "Update alle",
             "seconds": "Sekunden"
         }
