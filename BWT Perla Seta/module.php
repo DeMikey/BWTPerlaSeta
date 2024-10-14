@@ -292,44 +292,44 @@ declare(strict_types=1);
 				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 17, "schläft", "", 0xFFFFFF);
 			}
 		
-			if (!IPS_VariableProfileExists('BWTPerla_l')) {
-				IPS_CreateVariableProfile('BWTPerla_l', 1);
-				IPS_SetVariableProfileText('BWTPerla_l', '', 'l');
+			if (!IPS_VariableProfileExists('BWTPerla_Liter')) {
+				IPS_CreateVariableProfile('BWTPerla_Liter', 1);
+				IPS_SetVariableProfileText('BWTPerla_Liter', '', 'l');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_ml*°dH')) {
-				IPS_CreateVariableProfile('BWTPerla_ml*°dH', 1);
-				IPS_SetVariableProfileText('BWTPerla_ml*°dH', '', 'ml*°dH');
+			if (!IPS_VariableProfileExists('BWTPerla_Milliliter_Deutsche_Härtungsgrad')) {
+				IPS_CreateVariableProfile('BBWTPerla_Milliliter_Deutsche_Härtungsgrad', 1);
+				IPS_SetVariableProfileText('BWTPerla_Milliliter_Deutsche_Härtungsgrad', '', 'ml*°dH');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_l/h')) {
-				IPS_CreateVariableProfile('BWTPerla_l/h', 1);
-				IPS_SetVariableProfileText('BWTPerla_l/h', '', 'l/h');
+			if (!IPS_VariableProfileExists('BWTPerla_Liter_pro_Stunde')) {
+				IPS_CreateVariableProfile('BWTPerla_Liter_pro_Stunde', 1);
+				IPS_SetVariableProfileText('BWTPerla_Liter_pro_Stunde', '', 'l/h');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_ml')) {
-				IPS_CreateVariableProfile('BWTPerla_ml', 1);
-				IPS_SetVariableProfileText('BWTPerla_ml', '', 'ml');
+			if (!IPS_VariableProfileExists('BWTPerla_Milliliter')) {
+				IPS_CreateVariableProfile('BWTPerla_Milliliter', 1);
+				IPS_SetVariableProfileText('BWTPerla_Milliliter', '', 'ml');
 			}
 	
-			if (!IPS_VariableProfileExists('BWTPerla_ppm CaCO3')) {
-				IPS_CreateVariableProfile('BWTPerla_ppm CaCO3', 1);
-				IPS_SetVariableProfileText('BWTPerla_ppm CaCO3', '', 'ppm CaCO3');
+			if (!IPS_VariableProfileExists('BWTPerla_ppm_CaCO3')) {
+				IPS_CreateVariableProfile('BWTPerla_ppm_CaCO3', 1);
+				IPS_SetVariableProfileText('BWTPerla_ppm_CaCO3', '', 'ppm CaCO3');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_dH')) {
-				IPS_CreateVariableProfile('BWTPerla_dH', 1);
-				IPS_SetVariableProfileText('BWTPerla_dH', '', '°dH');
+			if (!IPS_VariableProfileExists('BWTPerla_Deutsche_Härtungsgrad')) {
+				IPS_CreateVariableProfile('BWTPerla_Deutsche_Härtungsgrad', 1);
+				IPS_SetVariableProfileText('BWTPerla_Deutsche_Härtungsgrad', '', '°dH');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_fH')) {
-				IPS_CreateVariableProfile('BWTPerla_fH', 1);
-				IPS_SetVariableProfileText('BWTPerla_fH', '', '°fH');
+			if (!IPS_VariableProfileExists('BWTPerla_Französische_Härtungsgrad')) {
+				IPS_CreateVariableProfile('BWTPerla_Französische_Härtungsgrad', 1);
+				IPS_SetVariableProfileText('BWTPerla_Französische_Härtungsgrad', '', '°fH');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_mmol/l')) {
-				IPS_CreateVariableProfile('BWTPerla_mmol/l', 1);
-				IPS_SetVariableProfileText('BWTPerla_mmol/l', '', 'mmol/l');
+			if (!IPS_VariableProfileExists('BWTPerla_MilliMol_pro_Liter')) {
+				IPS_CreateVariableProfile('BWTPerla_MilliMol_pro_Liter', 1);
+				IPS_SetVariableProfileText('BWTPerla_MilliMol_pro_Liter', '', 'mmol/l');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Tage')) {
