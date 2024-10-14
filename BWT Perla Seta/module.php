@@ -67,8 +67,8 @@ declare(strict_types=1);
 				// set values to variables
 	
 				//--- Identification
-				$this->updateIdent("ActiveErrorIDs", $data['ActiveErrorIDs']);
-				$this->updateIdent("BlendedWaterSinceSetup_l", $data['BlendedWaterSinceSetup_l']);
+			//	$this->updateIdent("ActiveErrorIDs", $data['ActiveErrorIDs']);
+				$this->SetValue("BlendedWaterSinceSetup_l", $data['BlendedWaterSinceSetup_l']);
 	
 				$this->updateIdent("CapacityColumn1_ml_dH", $data['CapacityColumn1_ml_dH']);
 				$this->updateIdent("CapacityColumn2_ml_dH", $data['CapacityColumn2_ml_dH']);
