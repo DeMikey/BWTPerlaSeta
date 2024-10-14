@@ -67,38 +67,38 @@ declare(strict_types=1);
 				// set values to variables
 	
 				//--- Identification
-			//	$this->updateIdent("ActiveErrorIDs", $data['ActiveErrorIDs']);
+				$this->SetValue("ActiveErrorIDs", $data['ActiveErrorIDs']);
 				$this->SetValue("BlendedWaterSinceSetup_l", $data['BlendedWaterSinceSetup_l']);
 	
-				$this->updateIdent("CapacityColumn1_ml_dH", $data['CapacityColumn1_ml_dH']);
-				$this->updateIdent("CapacityColumn2_ml_dH", $data['CapacityColumn2_ml_dH']);
-				$this->updateIdent("CurrentFlowrate_l_h", $data['CurrentFlowrate_l_h']);
-				$this->updateIdent("DosingSinceSetup_ml", $data['DosingSinceSetup_ml']);
-				$this->updateIdent("FirmwareVersion", $data['FirmwareVersion']);
-				$this->updateIdent("HardnessIN_CACO3", $data['HardnessIN_CACO3']);
-				$this->updateIdent("HardnessIN_dH", $data['HardnessIN_dH']);
-				$this->updateIdent("HardnessIN_fH", $data['HardnessIN_fH']);
-				$this->updateIdent("HardnessIN_mmol_l", $data['HardnessIN_mmol_l']);
-				$this->updateIdent("HardnessOUT_CACO3", $data['HardnessOUT_CACO3']);
-				$this->updateIdent("HardnessOUT_dH", $data['HardnessOUT_dH']);
-				$this->updateIdent("HardnessOUT_fH", $data['HardnessOUT_fH']);
-				$this->updateIdent("HardnessOUT_mmol_l", $data['HardnessOUT_mmol_l']);
-				$this->updateIdent("HolidayModeStartTime", $data['HolidayModeStartTime']);
-				$this->updateIdent("LastRegenerationColumn1", $data['LastRegenerationColumn1']);
-				$this->updateIdent("LastRegenerationColumn2", $data['LastRegenerationColumn2']);
-				$this->updateIdent("LastServiceCustomer", $data['LastServiceCustomer']);
-				$this->updateIdent("LastServiceTechnician", $data['LastServiceTechnician']);
-				$this->updateIdent("OutOfService", $data['OutOfService']);
-				$this->updateIdent("RegenerationCounterColumn1", $data['RegenerationCounterColumn1']);
-				$this->updateIdent("RegenerationCounterColumn2", $data['RegenerationCounterColumn2']);
-				$this->updateIdent("RegenerationCountSinceSetup", $data['RegenerationCountSinceSetup']);
-				$this->updateIdent("RegenerativLevel", $data['RegenerativLevel']);
-				$this->updateIdent("RegenerativRemaining_days", $data['RegenerativRemaining_days']);
-				$this->updateIdent("RegenerativSinceSetup_g", $data['RegenerativSinceSetup_g']);
-				$this->updateIdent("ShowError", $data['ShowError']);
-				$this->updateIdent("WaterTreatedCurrentDay_l", $data['WaterTreatedCurrentDay_l']);
-				$this->updateIdent("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
-				$this->updateIdent("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
+				$this->SetValue("CapacityColumn1_ml_dH", $data['CapacityColumn1_ml_dH']);
+				$this->SetValue("CapacityColumn2_ml_dH", $data['CapacityColumn2_ml_dH']);
+				$this->SetValue("CurrentFlowrate_l_h", $data['CurrentFlowrate_l_h']);
+				$this->SetValue("DosingSinceSetup_ml", $data['DosingSinceSetup_ml']);
+				$this->SetValue("FirmwareVersion", $data['FirmwareVersion']);
+				$this->SetValue("HardnessIN_CACO3", $data['HardnessIN_CACO3']);
+				$this->SetValue("HardnessIN_dH", $data['HardnessIN_dH']);
+				$this->SetValue("HardnessIN_fH", $data['HardnessIN_fH']);
+				$this->SetValue("HardnessIN_mmol_l", $data['HardnessIN_mmol_l']);
+				$this->SetValue("HardnessOUT_CACO3", $data['HardnessOUT_CACO3']);
+				$this->SetValue("HardnessOUT_dH", $data['HardnessOUT_dH']);
+				$this->SetValue("HardnessOUT_fH", $data['HardnessOUT_fH']);
+				$this->SetValue("HardnessOUT_mmol_l", $data['HardnessOUT_mmol_l']);
+				$this->SetValue("HolidayModeStartTime", $data['HolidayModeStartTime']);
+				$this->SetValue("LastRegenerationColumn1", $data['LastRegenerationColumn1']);
+				$this->SetValue("LastRegenerationColumn2", $data['LastRegenerationColumn2']);
+				$this->SetValue("LastServiceCustomer", $data['LastServiceCustomer']);
+				$this->SetValue("LastServiceTechnician", $data['LastServiceTechnician']);
+				$this->SetValue("OutOfService", $data['OutOfService']);
+				$this->SetValue("RegenerationCounterColumn1", $data['RegenerationCounterColumn1']);
+				$this->SetValue("RegenerationCounterColumn2", $data['RegenerationCounterColumn2']);
+				$this->SetValue("RegenerationCountSinceSetup", $data['RegenerationCountSinceSetup']);
+				$this->SetValue("RegenerativLevel", $data['RegenerativLevel']);
+				$this->SetValue("RegenerativRemaining_days", $data['RegenerativRemaining_days']);
+				$this->SetValue("RegenerativSinceSetup_g", $data['RegenerativSinceSetup_g']);
+				$this->SetValue("ShowError", $data['ShowError']);
+				$this->SetValue("WaterTreatedCurrentDay_l", $data['WaterTreatedCurrentDay_l']);
+				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
+				$this->SetValue("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
 			}
 	
 			// Get Health Data
@@ -106,9 +106,9 @@ declare(strict_types=1);
 			if ($data == false) {
 				return false;
 			} elseif (isset($data['successful'])) {#
-//				$this->updateIdent("mowerVoltageInternal", $data['health']['voltages']['int3v3']/1000);
-//				$this->updateIdent("mowerVoltageExternal", $data['health']['voltages']['ext3v3']);
-//				$this->updateIdent("mowerVoltageBattery", $data['health']['voltages']['batt']/1000);
+//				$this->SetValue("mowerVoltageInternal", $data['health']['voltages']['int3v3']/1000);
+//				$this->SetValue("mowerVoltageExternal", $data['health']['voltages']['ext3v3']);
+//				$this->SetValue("mowerVoltageBattery", $data['health']['voltages']['batt']/1000);
 			}
 	
 			// Set Timer
