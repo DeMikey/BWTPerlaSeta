@@ -297,9 +297,9 @@ declare(strict_types=1);
 				IPS_SetVariableProfileText('BWTPerla_Liter', '', 'l');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_Milliliter_Deutsche_Härtungsgrad')) {
-				IPS_CreateVariableProfile('BBWTPerla_Milliliter_Deutsche_Härtungsgrad', 1);
-				IPS_SetVariableProfileText('BWTPerla_Milliliter_Deutsche_Härtungsgrad', '', 'ml*°dH');
+			if (!IPS_VariableProfileExists('BWTPerla_Milliliter_Deutsche_Haertungsgrad')) {
+				IPS_CreateVariableProfile('BWTPerla_Milliliter_Deutsche_Haertungsgrad', 1);
+				IPS_SetVariableProfileText('BWTPerla_Milliliter_Deutsche_Haertungsgrad', '', 'ml*°dH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Liter_pro_Stunde')) {
@@ -317,14 +317,14 @@ declare(strict_types=1);
 				IPS_SetVariableProfileText('BWTPerla_ppm_CaCO3', '', 'ppm CaCO3');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_Deutsche_Härtungsgrad')) {
-				IPS_CreateVariableProfile('BWTPerla_Deutsche_Härtungsgrad', 1);
-				IPS_SetVariableProfileText('BWTPerla_Deutsche_Härtungsgrad', '', '°dH');
+			if (!IPS_VariableProfileExists('BWTPerla_Deutsche_Haertungsgrad')) {
+				IPS_CreateVariableProfile('BWTPerla_Deutsche_Haertungsgrad', 1);
+				IPS_SetVariableProfileText('BWTPerla_Deutsche_Haertungsgrad', '', '°dH');
 			}
 
-			if (!IPS_VariableProfileExists('BWTPerla_Französische_Härtungsgrad')) {
-				IPS_CreateVariableProfile('BWTPerla_Französische_Härtungsgrad', 1);
-				IPS_SetVariableProfileText('BWTPerla_Französische_Härtungsgrad', '', '°fH');
+			if (!IPS_VariableProfileExists('BWTPerla_Franzoesische_Haertungsgrad')) {
+				IPS_CreateVariableProfile('BWTPerla_Franzoesische_Haertungsgrad', 1);
+				IPS_SetVariableProfileText('BWTPerla_Franzoesische_Haertungsgrad', '', '°fH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_MilliMol_pro_Liter')) {
@@ -333,7 +333,7 @@ declare(strict_types=1);
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Tage')) {
-				IPS_CreateVariableProfile('BWTPerla_TAge', 1);
+				IPS_CreateVariableProfile('BWTPerla_Tage', 1);
 				IPS_SetVariableProfileText('BWTPerla_Tage', '', 'Tage');
 			}
 
