@@ -253,7 +253,7 @@ declare(strict_types=1);
 						IPS_SetParent($StatistikDayCat, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 				}
 				if (!@IPS_GetObjectIDByIdent("00:00-00:29", $StatistikDayCat)) {
-					IPS_SetParent($this->RegisterVariableInteger("0000 0029", "00:00-00:29", "", 101), $StatistikDayCat); 
+					IPS_SetParent($this->RegisterVariableInteger("00000029", "00:00-00:29", "", 101), $StatistikDayCat); 
 				}
 				if (!@IPS_GetObjectIDByIdent("00:30-00:59", $StatistikDayCat)) {
 					IPS_SetParent($this->RegisterVariableInteger("00:30-00-59", "00:30-00-59", "", 102), $StatistikDayCat); 
