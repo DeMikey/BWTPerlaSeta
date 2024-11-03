@@ -252,13 +252,16 @@ declare(strict_types=1);
 						IPS_SetName($StatistikDayCat, "Verbrauch Tag");   // Kategorie umbenennen
 						IPS_SetParent($StatistikDayCat, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 				}
-				if (!@IPS_GetObjectIDByIdent("00000029", $StatistikDayCat)) {
-					IPS_SetParent($this->RegisterVariableInteger("00000029", "00:00-00:29", "BWTPerla_Liter", 101), $StatistikDayCat); 
+				for ($i = 1; $i <= 10; $i++) {
+					echo $i;
+					if (!@IPS_GetObjectIDByIdent($i . "000" . $i . "029", $StatistikDayCat)) {
+						IPS_SetParent($this->RegisterVariableInteger($i . "000" . $i . "029", $i . "0:00-" . $i . "0:29", "BWTPerla_Liter", 101), $StatistikDayCat); 
+					}
+					if (!@IPS_GetObjectIDByIdent($i . "030" . $i . "059", $StatistikDayCat)) {
+						IPS_SetParent($this->RegisterVariableInteger($i . "030" . $i . "059", $i . "0:30-" . $i . "0-59", "BWTPerla_Liter", 102), $StatistikDayCat); 
+					}
 				}
-				if (!@IPS_GetObjectIDByIdent("00:30-00:59", $StatistikDayCat)) {
-					IPS_SetParent($this->RegisterVariableInteger("00:3000-59", "00:30-00-59", "BWTPerla_Liter", 102), $StatistikDayCat); 
-				}
-				if (!@IPS_GetObjectIDByIdent("01:00-01:29", $StatistikDayCat)) {
+/*				if (!@IPS_GetObjectIDByIdent("01:00-01:29", $StatistikDayCat)) {
 					IPS_SetParent($this->RegisterVariableInteger("01:00-01-29", "01:00-01-29", "", 103), $StatistikDayCat); 
 				}
 				if (!@IPS_GetObjectIDByIdent("01:30-01:59", $StatistikDayCat)) {
@@ -396,6 +399,7 @@ declare(strict_types=1);
 				if (!@IPS_GetObjectIDByIdent("23:30-23:59", $StatistikDayCat)) {
 					IPS_SetParent($this->RegisterVariableInteger("23:30-23-59", "23:30-23-59", "", 148), $StatistikDayCat); 
 				}
+*/
 			}
 		}
 
