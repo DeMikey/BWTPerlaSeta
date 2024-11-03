@@ -254,15 +254,15 @@ declare(strict_types=1);
 				}
 				for ($i = 0; $i <= 10; $i++) {
 					if ($i < 10) {
-						$Hour = 0 . $i;
+						$Hour = '0' . $i;
 					} else {
 						$Hour = $i;
 					}
 					if (!@IPS_GetObjectIDByIdent($i . "00" . $i . "29", $StatistikDayCat)) {
-						IPS_SetParent($this->RegisterVariableInteger($i . "00" . $i . "29", $i . ":00-" . $i . ":29", "BWTPerla_Liter", 101), $StatistikDayCat); 
+						IPS_SetParent($this->RegisterVariableInteger($i . "00" . $i . "29", $i . ":00-" . $i . ":29", "BWTPerla_Liter", 10 . $i), $StatistikDayCat); 
 					}
 					if (!@IPS_GetObjectIDByIdent($i . "30" . $i . "59", $StatistikDayCat)) {
-						IPS_SetParent($this->RegisterVariableInteger($i . "30" . $i . "59", $i . ":30-" . $i . "-59", "BWTPerla_Liter", 102), $StatistikDayCat); 
+						IPS_SetParent($this->RegisterVariableInteger($i . "30" . $i . "59", $i . ":30-" . $i . "-59", "BWTPerla_Liter", 10 . $i), $StatistikDayCat); 
 					}
 				}
 /*				if (!@IPS_GetObjectIDByIdent("01:00-01:29", $StatistikDayCat)) {
