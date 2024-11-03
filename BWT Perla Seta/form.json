@@ -63,6 +63,19 @@
             "caption": "   "
         },
         { 
+            "type":     "Label",
+            "label":    "Statistik"
+        },
+        {
+            "type":     "CheckBox",
+            "name":     "Tages Verbrauch",
+            "caption":  "DailyData"
+        },
+        {
+            "type": "Label",
+            "caption": "   "
+        },
+        { 
             "type": "Label",
             "label": "Debugging"
         },

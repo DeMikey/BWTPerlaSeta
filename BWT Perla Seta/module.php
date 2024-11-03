@@ -13,7 +13,7 @@ declare(strict_types=1);
 			$this->RegisterPropertyString("Password", '');
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
 			$this->RegisterPropertyInteger("UpdateTimer", 10);
-			$this->RegisterPropertyBoolean("Statistik", false);
+			$this->RegisterPropertyBoolean("DailyData", false);
 			$this->RegisterPropertyBoolean("DebugLog", false);
 
 			// Timer
@@ -38,7 +38,7 @@ declare(strict_types=1);
         	// Set Timer
         	if ($this->ReadPropertyBoolean("HTTPUpdateTimer") and $this->ReadPropertyInteger("UpdateTimer") >= 10) {
 //            	$this->SetTimerInterval("BWTPerla_UpdateTimer", $this->ReadPropertyInteger("UpdateTimer")*1000);
-            	$this->SetTimerInterval("BWTPerla_UpdateTimer", 30000);
+            	$this->SetTimerInterval("BWTPerla_UpdateTimer", 1800000);
         	} else {
             	$this->SetTimerInterval("BWTPerla_UpdateTimer", 0);
         	}
@@ -104,7 +104,7 @@ declare(strict_types=1);
 				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
 				$this->SetValue("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
 			}
-			if ($this->ReadPropertyBoolean("Statistik")) {
+			if ($this->ReadPropertyBoolean("DailyData")) {
 				// Get Health Data
 				$data = $this->SendHTTPCommand('GetDailyData');
 				if ($data == false) {
@@ -246,7 +246,7 @@ declare(strict_types=1);
 	
 			//---- Statistik
 
-			if ($this->ReadPropertyBoolean("Statistik")) {
+			if ($this->ReadPropertyBoolean("DailyData")) {
 				if (!$StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
 					$StatistikDayCat = IPS_CreateCategory();   // Kategorie anlegen
 						IPS_SetName($StatistikDayCat, "Verbrauch Tag");   // Kategorie umbenennen
