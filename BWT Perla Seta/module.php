@@ -113,7 +113,7 @@ declare(strict_types=1);
 					$this->log('Update - Semaphore leaved');
 				} else {
 					$StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID);
-					$this->SetValue("00:00-00-29", $data['0000_0029_l']);
+					$this->SetValue("00000029", $data['0000_0029_l']);
 //				$this->SetValue("mowerVoltageInternal", $data['health']['voltages']['int3v3']/1000);
 //				$this->SetValue("mowerVoltageExternal", $data['health']['voltages']['ext3v3']);
 //				$this->SetValue("mowerVoltageBattery", $data['health']['voltages']['batt']/10
@@ -252,11 +252,11 @@ declare(strict_types=1);
 						IPS_SetName($StatistikDayCat, "Verbrauch Tag");   // Kategorie umbenennen
 						IPS_SetParent($StatistikDayCat, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 				}
-				if (!@IPS_GetObjectIDByIdent("00:00-00:29", $StatistikDayCat)) {
-					IPS_SetParent($this->RegisterVariableInteger("00000029", "00:00-00:29", "", 101), $StatistikDayCat); 
+				if (!@IPS_GetObjectIDByIdent("00000029", $StatistikDayCat)) {
+					IPS_SetParent($this->RegisterVariableInteger("00000029", "00:00-00:29", "BWTPerla_Liter", 101), $StatistikDayCat); 
 				}
 				if (!@IPS_GetObjectIDByIdent("00:30-00:59", $StatistikDayCat)) {
-					IPS_SetParent($this->RegisterVariableInteger("00:30-00-59", "00:30-00-59", "", 102), $StatistikDayCat); 
+					IPS_SetParent($this->RegisterVariableInteger("00:3000-59", "00:30-00-59", "BWTPerla_Liter", 102), $StatistikDayCat); 
 				}
 				if (!@IPS_GetObjectIDByIdent("01:00-01:29", $StatistikDayCat)) {
 					IPS_SetParent($this->RegisterVariableInteger("01:00-01-29", "01:00-01-29", "", 103), $StatistikDayCat); 
