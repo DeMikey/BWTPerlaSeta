@@ -252,9 +252,9 @@ declare(strict_types=1);
 						IPS_SetName($StatistikDayCat, "Verbrauch Tag");   // Kategorie umbenennen
 						IPS_SetParent($StatistikDayCat, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 				}
-				for ($i = 1; $i <= 10; $i++) {
+				for ($i = 0; $i <= 10; $i++) {
 					if ($i < 10) {
-						$Hour = "0" . $i;
+						$Hour = 0 . $i;
 					} else {
 						$Hour = $i;
 					}
