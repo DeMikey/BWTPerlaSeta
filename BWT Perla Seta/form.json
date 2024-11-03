@@ -68,8 +68,8 @@
         },
         {
             "type":     "CheckBox",
-            "name":     "Tages Verbrauch",
-            "caption":  "DailyData"
+            "name":     "DailyData",
+            "caption":  "Tages Verbrauch"
         },
         {
             "type": "Label",
