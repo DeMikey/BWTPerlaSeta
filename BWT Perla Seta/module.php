@@ -345,9 +345,9 @@ declare(strict_types=1);
 					// Löschen der Variabeln
 					for ($i = 0; $i <= 31; $i++) {
 						if ($i < 10) {
-							$Hour = "0" . $i;
+							$Day = "0" . $i;
 						} else {
-							$Hour = $i;
+							$Day = $i;
 						}
 						if ($VarId = @IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
 							IPS_DeleteVariable ($VarId); 
