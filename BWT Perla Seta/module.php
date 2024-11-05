@@ -14,7 +14,7 @@ declare(strict_types=1);
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
 			$this->RegisterPropertyInteger("UpdateTimer", 10);
 			$this->RegisterPropertyBoolean("DailyData", false);
-			$this->RegisterPropertyBoolean("MontlyData", false);
+			$this->RegisterPropertyBoolean("MonthlyData", false);
 			$this->RegisterPropertyBoolean("YearlyData", false);
 			$this->RegisterPropertyBoolean("DebugLog", false);
 

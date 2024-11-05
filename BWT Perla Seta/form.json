@@ -73,7 +73,7 @@
         },
         {
             "type":     "CheckBox",
-            "name":     "MontlyData",
+            "name":     "MonthlyData",
             "caption":  "Monats Verbrauch"
         },
         {
