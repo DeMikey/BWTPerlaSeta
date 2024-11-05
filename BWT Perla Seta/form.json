@@ -72,6 +72,16 @@
             "caption":  "Tages Verbrauch"
         },
         {
+            "type":     "CheckBox",
+            "name":     "MontlyData",
+            "caption":  "Monats Verbrauch"
+        },
+        {
+            "type":     "CheckBox",
+            "name":     "YearlyData",
+            "caption":  "Jahres Verbrauch"
+        },
+        {
             "type": "Label",
             "caption": "   "
         },

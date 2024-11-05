@@ -14,6 +14,8 @@ declare(strict_types=1);
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
 			$this->RegisterPropertyInteger("UpdateTimer", 10);
 			$this->RegisterPropertyBoolean("DailyData", false);
+			$this->RegisterPropertyBoolean("MontlyData", false);
+			$this->RegisterPropertyBoolean("YearlyData", false);
 			$this->RegisterPropertyBoolean("DebugLog", false);
 
 			// Timer
@@ -111,6 +113,7 @@ declare(strict_types=1);
 					IPS_SemaphoreLeave($semaphore);
 					$this->log('Update - Keine Tages Ststistik Daten empfangen');
 					$this->log('Update - Semaphore leaved');
+					return false;
 				} else {
 					$DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID);
 					$this->log('Update - Tages Kategorie Id: ' . $DailyDataCategory);
@@ -128,10 +131,30 @@ declare(strict_types=1);
 							SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
 						}
 					}
-	
-					//				$this->SetValue("mowerVoltageInternal", $data['health']['voltages']['int3v3']/1000);
-//				$this->SetValue("mowerVoltageExternal", $data['health']['voltages']['ext3v3']);
-//				$this->SetValue("mowerVoltageBattery", $data['health']['voltages']['batt']/10
+				}
+			}
+			if ($this->ReadPropertyBoolean("MontlyData")) {
+				// Get Health Data
+				$data = $this->SendHTTPCommand('GetMontlyData');
+				if ($data == false) {
+					IPS_SemaphoreLeave($semaphore);
+					$this->log('Update - Keine Tages Ststistik Daten empfangen');
+					$this->log('Update - Semaphore leaved');
+					return false;
+				} else {
+					$MontlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID);
+					$this->log('Update - Tages Kategorie Id: ' . $MontlyDataCategory);
+					for ($i = 0; $i <= 31; $i++) {
+						if ($i < 10) {
+							$Day = "0" . $i;
+						} else {
+							$Day = $i;
+						}
+						$this->log("Montly key: " . "Day" . $Day . "_l");
+						if ($VarId = @IPS_GetObjectIDByIdent("Day" . $Day, $MontlyDataCategory)) {
+							SetValue($VarId, $data["Day" . $Day . "_l"]);
+						}
+					}
 				}
 			}
 			// Set Timer
@@ -300,6 +323,40 @@ declare(strict_types=1);
 					IPS_DeleteCategory ($DailyDataCategory); 
 				}
 			}
+			if ($this->ReadPropertyBoolean("MonthlyData")) {
+				if (!$MonthlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID)) {
+					$MonthlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
+						IPS_SetName($MonthlyDataCategory, "Verbrauch Monat");   // Kategorie umbenennen
+						IPS_SetParent($MonthlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+				}
+				for ($i = 0; $i <= 31; $i++) {
+					if ($i < 10) {
+						$Day = "0" . $i;
+					} else {
+						$Day = $i;
+					}
+					if (!@IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
+						IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, "Tag " . $Day, "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
+					}
+				}
+			} else {
+				if ($MonthlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID)) {
+					// Löschen der Variabeln
+					for ($i = 0; $i <= 31; $i++) {
+						if ($i < 10) {
+							$Hour = "0" . $i;
+						} else {
+							$Hour = $i;
+						}
+						if ($VarId = @IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
+							IPS_DeleteVariable ($VarId); 
+						}
+					} 
+					// Löschen der Katergory
+					IPS_DeleteCategory ($MonthlyDataCategory); 
+				}
+			}
+
 		}
 
     	#================================================================================================
@@ -323,7 +380,7 @@ declare(strict_types=1);
 		
 			if (!IPS_VariableProfileExists('BWTPerla_Liter')) {
 				IPS_CreateVariableProfile('BWTPerla_Liter', 1);
-				IPS_SetVariableProfileText('BWTPerla_Liter', '', 'l');
+				IPS_SetVariableProfileText('BWTPerla_Liter', '', ' l');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Milliliter_Deutsche_Haertungsgrad')) {
