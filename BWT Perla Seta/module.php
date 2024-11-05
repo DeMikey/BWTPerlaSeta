@@ -113,14 +113,16 @@ declare(strict_types=1);
 					$this->log('Update - Semaphore leaved');
 				} else {
 					$StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID);
+					$this->log('Update - Tages Kategorie Id: ' . $StatistikDayCat);
 					for ($i = 0; $i <= 10; $i++) {
 						if ($i < 10) {
 							$Hour = "0" . $i;
 						} else {
 							$Hour = $i;
 						}
+						$this->log('Daily key: ' . $Hour -  "00_" . $Hour . "29_l");
 						if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
-							$this->SetValue(IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat), $data[$Hour -  "00_" . $Hour . "29_l"]);
+							$this->SetValue(@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat), $data[$Hour -  "00_" . $Hour . "29_l"]);
 						}
 						if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat)) {
 							$this->SetValue(IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat), $data[$Hour -  "30_" . $Hour . "59_l"]);
