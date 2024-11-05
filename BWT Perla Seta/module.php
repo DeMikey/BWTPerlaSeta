@@ -122,10 +122,10 @@ declare(strict_types=1);
 						}
 						$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
 						if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
-							$this->SetValue(@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat), $data[$Hour .  "00_" . $Hour . "29_l"]);
+							SetValue(@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat), $data[$Hour .  "00_" . $Hour . "29_l"]);
 						}
 						if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat)) {
-							$this->SetValue(IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat), $data[$Hour .  "30_" . $Hour . "59_l"]);
+							SetValue(IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat), $data[$Hour .  "30_" . $Hour . "59_l"]);
 						}
 					}
 	
