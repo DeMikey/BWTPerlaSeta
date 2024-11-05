@@ -121,11 +121,11 @@ declare(strict_types=1);
 							$Hour = $i;
 						}
 						$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
-						if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
-							SetValue(@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat), $data[$Hour .  "00_" . $Hour . "29_l"]);
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
+							SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
 						}
-						if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat)) {
-							SetValue(IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat), $data[$Hour .  "30_" . $Hour . "59_l"]);
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat)) {
+							SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
 						}
 					}
 	
@@ -282,7 +282,8 @@ declare(strict_types=1);
 				}
 			} else {
 				if ($StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
-				// Löschen der Katergory
+					// Löschen der Katergory
+					IPS_DeleteCategory ($StatistikDayCat); 
 				}
 			}
 		}
