@@ -133,9 +133,9 @@ declare(strict_types=1);
 					}
 				}
 			}
-			if ($this->ReadPropertyBoolean("MontlyData")) {
+			if ($this->ReadPropertyBoolean("MonthlyData")) {
 				// Get Health Data
-				$data = $this->SendHTTPCommand('GetMontlyData');
+				$data = $this->SendHTTPCommand('GetMonthlyData');
 				if ($data == false) {
 					IPS_SemaphoreLeave($semaphore);
 					$this->log('Update - Keine Tages Ststistik Daten empfangen');
