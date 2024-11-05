@@ -144,7 +144,7 @@ declare(strict_types=1);
 				} else {
 					$MontlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID);
 					$this->log('Update - Tages Kategorie Id: ' . $MontlyDataCategory);
-					for ($i = 0; $i <= 31; $i++) {
+					for ($i = 1; $i <= 31; $i++) {
 						if ($i < 10) {
 							$Day = "0" . $i;
 						} else {
@@ -330,7 +330,7 @@ declare(strict_types=1);
 						IPS_SetParent($MonthlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 						IPS_SetPosition($MonthlyDataCategory, 5); // Kategorie an Position 5 verschieben
 				}
-				for ($i = 0; $i <= 31; $i++) {
+				for ($i = 1; $i <= 31; $i++) {
 					if ($i < 10) {
 						$Day = "0" . $i;
 					} else {
@@ -343,7 +343,7 @@ declare(strict_types=1);
 			} else {
 				if ($MonthlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID)) {
 					// Löschen der Variabeln
-					for ($i = 0; $i <= 31; $i++) {
+					for ($i = 1; $i <= 31; $i++) {
 						if ($i < 10) {
 							$Day = "0" . $i;
 						} else {
