@@ -388,7 +388,7 @@ declare(strict_types=1);
 						IPS_SetParent($YearlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 						IPS_SetPosition($YearlyDataCategory, 5); // Kategorie an Position 5 verschieben
 				}
-				for ($i = 1; $i <= 31; $i++) {
+				for ($i = 1; $i <= 12; $i++) {
 					if ($i < 10) {
 						$Year = "0" . $i;
 					} else {
@@ -401,7 +401,7 @@ declare(strict_types=1);
 			} else {
 				if ($YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID)) {
 					// Löschen der Variabeln
-					for ($i = 1; $i <= 31; $i++) {
+					for ($i = 1; $i <= 12; $i++) {
 						if ($i < 10) {
 							$Year = "0" . $i;
 						} else {
