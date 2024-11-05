@@ -120,7 +120,7 @@ declare(strict_types=1);
 						} else {
 							$Hour = $i;
 						}
-						$this->log('Daily key: ' . $Hour -  "00_" . $Hour . "29_l");
+						$this->log("Daily key: " . $Hour -  "00_" . $Hour . "29_l");
 						if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
 							$this->SetValue(@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat), $data[$Hour -  "00_" . $Hour . "29_l"]);
 						}
