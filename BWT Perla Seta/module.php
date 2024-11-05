@@ -112,19 +112,19 @@ declare(strict_types=1);
 					$this->log('Update - Keine Tages Ststistik Daten empfangen');
 					$this->log('Update - Semaphore leaved');
 				} else {
-					$StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID);
-					$this->log('Update - Tages Kategorie Id: ' . $StatistikDayCat);
-					for ($i = 0; $i <= 10; $i++) {
+					$DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID);
+					$this->log('Update - Tages Kategorie Id: ' . $DailyDataCategory);
+					for ($i = 0; $i <= 23; $i++) {
 						if ($i < 10) {
 							$Hour = "0" . $i;
 						} else {
 							$Hour = $i;
 						}
 						$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
 							SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
 						}
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat)) {
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
 							SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
 						}
 					}
@@ -262,28 +262,42 @@ declare(strict_types=1);
 			//---- Statistik
 
 			if ($this->ReadPropertyBoolean("DailyData")) {
-				if (!$StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
-					$StatistikDayCat = IPS_CreateCategory();   // Kategorie anlegen
-						IPS_SetName($StatistikDayCat, "Verbrauch Tag");   // Kategorie umbenennen
-						IPS_SetParent($StatistikDayCat, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+				if (!$DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
+					$DailyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
+						IPS_SetName($DailyDataCategory, "Verbrauch Tag");   // Kategorie umbenennen
+						IPS_SetParent($DailyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 				}
-				for ($i = 0; $i <= 10; $i++) {
+				for ($i = 0; $i <= 23; $i++) {
 					if ($i < 10) {
 						$Hour = "0" . $i;
 					} else {
 						$Hour = $i;
 					}
-					if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $StatistikDayCat)) {
-						IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $StatistikDayCat); 
+					if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
+						IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
 					}
-					if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $StatistikDayCat)) {
-						IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $StatistikDayCat); 
+					if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
+						IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
 					}
 				}
 			} else {
-				if ($StatistikDayCat = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
+				if ($DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
+					// Löschen der Variabeln
+					for ($i = 0; $i <= 23; $i++) {
+						if ($i < 10) {
+							$Hour = "0" . $i;
+						} else {
+							$Hour = $i;
+						}
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
+							IPS_DeleteVariable ($VarId); 
+						}
+						if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
+							IPS_DeleteVariable ($VarId);
+						}
+					} 
 					// Löschen der Katergory
-					IPS_DeleteCategory ($StatistikDayCat); 
+					IPS_DeleteCategory ($DailyDataCategory); 
 				}
 			}
 		}
