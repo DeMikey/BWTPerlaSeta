@@ -138,12 +138,12 @@ declare(strict_types=1);
 				$data = $this->SendHTTPCommand('GetMonthlyData');
 				if ($data == false) {
 					IPS_SemaphoreLeave($semaphore);
-					$this->log('Update - Keine Tages Ststistik Daten empfangen');
+					$this->log('Update - Keine Monats Ststistik Daten empfangen');
 					$this->log('Update - Semaphore leaved');
 					return false;
 				} else {
 					$MontlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID);
-					$this->log('Update - Tages Kategorie Id: ' . $MontlyDataCategory);
+					$this->log('Update - Monats Kategorie Id: ' . $MontlyDataCategory);
 					for ($i = 1; $i <= 31; $i++) {
 						if ($i < 10) {
 							$Day = "0" . $i;
@@ -153,6 +153,30 @@ declare(strict_types=1);
 						$this->log("Montly key: " . "Day" . $Day . "_l");
 						if ($VarId = @IPS_GetObjectIDByIdent("Day" . $Day, $MontlyDataCategory)) {
 							SetValue($VarId, $data["Day" . $Day . "_l"]);
+						}
+					}
+				}
+			}
+			if ($this->ReadPropertyBoolean("YearlyData")) {
+				// Get Health Data
+				$data = $this->SendHTTPCommand('GetYearlyData');
+				if ($data == false) {
+					IPS_SemaphoreLeave($semaphore);
+					$this->log('Update - Keine Jahres Ststistik Daten empfangen');
+					$this->log('Update - Semaphore leaved');
+					return false;
+				} else {
+					$YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID);
+					$this->log('Update - Jahres Kategorie Id: ' . $YearlyDataCategory);
+					for ($i = 1; $i <= 12; $i++) {
+						if ($i < 10) {
+							$Year = "0" . $i;
+						} else {
+							$Year = $i;
+						}
+						$this->log("Montly key: " . "Month" . $Year . "_l");
+						if ($VarId = @IPS_GetObjectIDByIdent("Month" . $Year, $YearlyDataCategory)) {
+							SetValue($VarId, $data["Month" . $Year . "_l"]);
 						}
 					}
 				}
@@ -357,7 +381,40 @@ declare(strict_types=1);
 					IPS_DeleteCategory ($MonthlyDataCategory); 
 				}
 			}
-
+			if ($this->ReadPropertyBoolean("YearlyData")) {
+				if (!$YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID)) {
+					$YearlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
+						IPS_SetName($YearlyDataCategory, "Verbrauch Jahr");   // Kategorie umbenennen
+						IPS_SetParent($YearlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+						IPS_SetPosition($YearlyDataCategory, 5); // Kategorie an Position 5 verschieben
+				}
+				for ($i = 1; $i <= 31; $i++) {
+					if ($i < 10) {
+						$Year = "0" . $i;
+					} else {
+						$Year = $i;
+					}
+					if (!@IPS_GetObjectIDByIdent("Day" . $Year, $YearlyDataCategory)) {
+						IPS_SetParent($this->RegisterVariableInteger("Month" . $Year, "Monat " . $Year, "BWTPerla_Liter", 20 . $i), $YearlyDataCategory); 
+					}
+				}
+			} else {
+				if ($YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID)) {
+					// Löschen der Variabeln
+					for ($i = 1; $i <= 31; $i++) {
+						if ($i < 10) {
+							$Year = "0" . $i;
+						} else {
+							$Year = $i;
+						}
+						if ($VarId = @IPS_GetObjectIDByIdent("Month" . $Year, $YearlyDataCategory)) {
+							IPS_DeleteVariable ($VarId); 
+						}
+					} 
+					// Löschen der Katergory
+					IPS_DeleteCategory ($YearlyDataCategory); 
+				}
+			}
 		}
 
     	#================================================================================================
