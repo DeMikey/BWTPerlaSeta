@@ -51,14 +51,6 @@
             "caption":  "AutomaticUpdate"
         },
         {
-            "name": "UpdateTimer",
-            "type": "NumberSpinner",
-            "caption":  "UpdateTimer",
-            "minimum":  10,
-            "maximum":  300,
-            "suffix":  "seconds"
-        },
-        {
             "type": "Label",
             "caption": "   "
         },

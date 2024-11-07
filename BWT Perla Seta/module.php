@@ -12,7 +12,7 @@ declare(strict_types=1);
 			$this->RegisterPropertyString("Username", '');
 			$this->RegisterPropertyString("Password", '');
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
-			$this->RegisterPropertyInteger("UpdateTimer", 10);
+//			$this->RegisterPropertyInteger("UpdateTimer", 10);
 			$this->RegisterPropertyBoolean("DailyData", false);
 			$this->RegisterPropertyBoolean("MonthlyData", false);
 			$this->RegisterPropertyBoolean("YearlyData", false);
@@ -271,40 +271,37 @@ declare(strict_types=1);
     	#================================================================================================
 
 			//--- Basic Data ---------------------------------------------------------
-			$this->RegisterVariableString( "ActiveErrorIDs", "ActiveErrorIDs", "", 0);
-			$this->RegisterVariableInteger("BlendedWaterSinceSetup_l", "BlendedWaterSinceSetup_l", "", 1 );
-	
-			// Interactive --------------------------------------------------------------
-	
-			$this->RegisterVariableInteger("CapacityColumn1_ml_dH", "ModCapacityColumn1_ml_dHus", "", 20);
-			$this->RegisterVariableInteger("CapacityColumn2_ml_dH", "CapacityColumn2_ml_dH", "", 21 );
-			$this->RegisterVariableInteger("CurrentFlowrate_l_h", "CurrentFlowrate_l_h", "", 21 );
-			$this->RegisterVariableInteger("DosingSinceSetup_ml", "DosingSinceSetup_ml", "", 21 );
-			$this->RegisterVariableString( "FirmwareVersion", "FirmwareVersion", "", 0);
-			$this->RegisterVariableInteger("HardnessIN_CaCO3", "Eingangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessIN_dH", "Eingangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessIN_fH", "Eingangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessIN_mmol_l", "Eingangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessOUT_CaCO3", "Ausgangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessOUT_dH", "Ausgangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessOUT_fH", "Ausgangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HardnessOUT_mmol_l", "Ausgangswasserhärte", "", 21 );
-			$this->RegisterVariableInteger("HolidayModeStartTime", "Urlaubsmodus", "", 21 );
-			$this->RegisterVariableString( "LastRegenerationColumn1", "Regeneration von Säule 1", "", 0);
-			$this->RegisterVariableString( "LastRegenerationColumn2", "Regeneration von Säule 2", "", 0);
-			$this->RegisterVariableString( "LastServiceCustomer", "Letzte routinemässige Wartung", "", 0);
-			$this->RegisterVariableString( "LastServiceTechnican", "Letzte Expertwartung", "", 0);
-			$this->RegisterVariableInteger("OutOfService", "OutOfService", "", 21 );
-			$this->RegisterVariableInteger("RegenerationCounterColumn1", "RegenerationCounterColumn1", "", 21 );
-			$this->RegisterVariableInteger("RegenerationCounterColumn2", "RegenerationCounterColumn2", "", 21 );
-			$this->RegisterVariableInteger("RegenerationCountSinceSetup", "RegenerationCountSinceSetup", "", 21 );
-			$this->RegisterVariableInteger("RegenerativLevel", "RegenerativLevel", "", 21 );
-			$this->RegisterVariableInteger("RegenerativRemainingDays", "RegenerativRemainingDays", "", 21 );
-			$this->RegisterVariableInteger("RegenerativSinceSetup_g", "RegenerativSinceSetup_g", "", 21 );
-			$this->RegisterVariableInteger("ShowError", "ShowError", "", 21 );
-			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", "WaterTreatedCurrentDay_l", "", 21 );
-			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", "WaterTreatedCurrentMonth_l", "", 21 );
-			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", "WaterTreatedCurrentYear_l", "", 21 );
+			$this->RegisterVariableString( "ActiveErrorIDs", $this->Translate("ActiveErrorIDs"), "BWTPerla_ErrorCode", 0);
+			$this->RegisterVariableInteger("BlendedWaterSinceSetup_l", $this->Translate("BlendedWaterSinceSetup_l"), "BWTPerla_Liter", 1 );
+			$this->RegisterVariableInteger("CapacityColumn1_ml_dH", $this->Translate("CapacityColumn1_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 20);
+			$this->RegisterVariableInteger("CapacityColumn2_ml_dH", $this->Translate("CapacityColumn2_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 21 );
+			$this->RegisterVariableInteger("CurrentFlowrate_l_h", $this->Translate("CurrentFlowrate_l_h"), "BWTPerla_Liter_pro_Stunde", 21 );
+			$this->RegisterVariableInteger("DosingSinceSetup_ml", $this->Translate("DosingSinceSetup_ml"), "BWTPerla_Milliliter", 21 );
+			$this->RegisterVariableString("FirmwareVersion", $this->Translate("FirmwareVersion"), "", 0);
+			$this->RegisterVariableInteger("HardnessIN_CaCO3", $this->Translate("HardnessIN_CaCO3"), "BWTPerla_ppm_CaCO3", 21 );
+			$this->RegisterVariableInteger("HardnessIN_dH", $this->Translate("HardnessIN_dH"), "BWTPerla_Deutsche_Haertungsgrad", 21 );
+			$this->RegisterVariableInteger("HardnessIN_fH", $this->Translate("HardnessIN_fH"), "BWTPerla_Franzoesische_Haertungsgrad", 21 );
+			$this->RegisterVariableInteger("HardnessIN_mmol_l", $this->Translate("HardnessIN_mmol_l"), "BWTPerla_MilliMol_pro_Liter", 21 );
+			$this->RegisterVariableInteger("HardnessOUT_CaCO3", $this->Translate("HardnessOUT_CaCO3"), "BWTPerla_ppm_CaCO3", 21 );
+			$this->RegisterVariableInteger("HardnessOUT_dH", $this->Translate("HardnessOUT_dH"), "BWTPerla_Deutsche_Haertungsgrad", 21 );
+			$this->RegisterVariableInteger("HardnessOUT_fH", $this->Translate("HardnessOUT_fH"), "BWTPerla_Franzoesische_Haertungsgrad", 21 );
+			$this->RegisterVariableInteger("HardnessOUT_mmol_l", $this->Translate("HardnessOUT_mmol_l"), "BWTPerla_MilliMol_pro_Liter", 21 );
+			$this->RegisterVariableInteger("HolidayModeStartTime", $this->Translate("HolidayModeStartTime"), "", 21 );
+			$this->RegisterVariableString("LastRegenerationColumn1", $this->Translate("LastRegenerationColumn1"), "", 0);
+			$this->RegisterVariableString("LastRegenerationColumn2", $this->Translate("LastRegenerationColumn2"), "", 0);
+			$this->RegisterVariableString("LastServiceCustomer", $this->Translate("LastServiceCustomer"), "", 0);
+			$this->RegisterVariableString("LastServiceTechnican", $this->Translate("LastServiceTechnican"), "", 0);
+			$this->RegisterVariableInteger("OutOfService", $this->Translate("OutOfService"), "", 21 );
+			$this->RegisterVariableInteger("RegenerationCounterColumn1", $this->Translate("RegenerationCounterColumn1"), "", 21 );
+			$this->RegisterVariableInteger("RegenerationCounterColumn2", $this->Translate("RegenerationCounterColumn2"), "", 21 );
+			$this->RegisterVariableInteger("RegenerationCountSinceSetup", $this->Translate("RegenerationCountSinceSetup"), "", 21 );
+			$this->RegisterVariableInteger("RegenerativLevel", $this->Translate("RegenerativLevel"), "BWTPerla_Prozent", 21 );
+			$this->RegisterVariableInteger("RegenerativRemainingDays", $this->Translate("RegenerativRemainingDays"), "BWTPerla_Tage", 21 );
+			$this->RegisterVariableInteger("RegenerativSinceSetup_g", $this->Translate("RegenerativSinceSetup_g"), "BWTPerla_Gramm", 21 );
+			$this->RegisterVariableInteger("ShowError", $this->Translate("ShowError"), "", 21 );
+			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 21 );
+			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 21 );
+			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 21 );
 	
 			//---- Statistik
 
@@ -424,16 +421,50 @@ declare(strict_types=1);
 			if (!IPS_VariableProfileExists('BWTPerla_ErrorCode')) {
 				IPS_CreateVariableProfile('BWTPerla_ErrorCode', 1);
 				IPS_SetVariableProfileIcon('BWTPerla_ErrorCode', '');
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 0, "Status wird ermittelt", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 1, "geparkt", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 2, "mäht", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 3, "sucht die Ladestation", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 4, "lädt", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 5, "sucht", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 7, "Fehlerstatus", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 8, "Schleifensignal verloren", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 16, "abgeschaltet", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 17, "schläft", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 0, $this->Translate("Error Code 0"), "", 0x00FF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 1, $this->Translate("Error Code 1"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 2, $this->Translate("Error Code 2"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 3, $this->Translate("Error Code 3"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 5, $this->Translate("Warning Code 5"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 8, $this->Translate("Error Code 8"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 9, $this->Translate("Error Code 9"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 10, $this->Translate("Error Code 10"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 12, $this->Translate("Error Code 12"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 13, $this->Translate("Error Code 13"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 14, $this->Translate("Error Code 14"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 15, $this->Translate("Warning Code 15"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 16, $this->Translate("Warning Code 16"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 21, $this->Translate("Error Code 21"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 22, $this->Translate("Error Code 22"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 25, $this->Translate("Warning Code 25"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 26, $this->Translate("Error Code 26"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 27, $this->Translate("Error Code 27"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 32, $this->Translate("Warning Code 32"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 33, $this->Translate("Warning Code 33"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 34, $this->Translate("Warning Code 34"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 35, $this->Translate("Warning Code 35"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 36, $this->Translate("Warning Code 36"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 43, $this->Translate("Error Code 43"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 44, $this->Translate("Error Code 44"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 45, $this->Translate("Error Code 45"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 46, $this->Translate("Error Code 46"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 54, $this->Translate("Warning Code 54"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 55, $this->Translate("Warning Code 55"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 56, $this->Translate("Error Code 56"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 57, $this->Translate("Error Code 57"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 58, $this->Translate("Error Code 58"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 59, $this->Translate("Error Code 59"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 61, $this->Translate("Warning Code 61"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 62, $this->Translate("Warning Code 62"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 63, $this->Translate("Warning Code 63"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 64, $this->Translate("Warning Code 64"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 65, $this->Translate("Error Code 65"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 66, $this->Translate("Warning Code 66"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 67, $this->Translate("Warning Code 67"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 68, $this->Translate("Error Code 68"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 74, $this->Translate("Warning Code 74"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 75, $this->Translate("Warning Code 75"), "", 0xFFFF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_ErrorCode", 88, $this->Translate("Warning Code 88"), "", 0xFFFF00);
 			}
 		
 			if (!IPS_VariableProfileExists('BWTPerla_Liter')) {
@@ -443,52 +474,52 @@ declare(strict_types=1);
 
 			if (!IPS_VariableProfileExists('BWTPerla_Milliliter_Deutsche_Haertungsgrad')) {
 				IPS_CreateVariableProfile('BWTPerla_Milliliter_Deutsche_Haertungsgrad', 1);
-				IPS_SetVariableProfileText('BWTPerla_Milliliter_Deutsche_Haertungsgrad', '', 'ml*°dH');
+				IPS_SetVariableProfileText('BWTPerla_Milliliter_Deutsche_Haertungsgrad', '', ' ml*°dH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Liter_pro_Stunde')) {
 				IPS_CreateVariableProfile('BWTPerla_Liter_pro_Stunde', 1);
-				IPS_SetVariableProfileText('BWTPerla_Liter_pro_Stunde', '', 'l/h');
+				IPS_SetVariableProfileText('BWTPerla_Liter_pro_Stunde', '', ' l/h');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Milliliter')) {
 				IPS_CreateVariableProfile('BWTPerla_Milliliter', 1);
-				IPS_SetVariableProfileText('BWTPerla_Milliliter', '', 'ml');
+				IPS_SetVariableProfileText('BWTPerla_Milliliter', '', ' ml');
 			}
 	
 			if (!IPS_VariableProfileExists('BWTPerla_ppm_CaCO3')) {
 				IPS_CreateVariableProfile('BWTPerla_ppm_CaCO3', 1);
-				IPS_SetVariableProfileText('BWTPerla_ppm_CaCO3', '', 'ppm CaCO3');
+				IPS_SetVariableProfileText('BWTPerla_ppm_CaCO3', '', ' ppm CaCO3');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Deutsche_Haertungsgrad')) {
 				IPS_CreateVariableProfile('BWTPerla_Deutsche_Haertungsgrad', 1);
-				IPS_SetVariableProfileText('BWTPerla_Deutsche_Haertungsgrad', '', '°dH');
+				IPS_SetVariableProfileText('BWTPerla_Deutsche_Haertungsgrad', '', ' °dH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Franzoesische_Haertungsgrad')) {
 				IPS_CreateVariableProfile('BWTPerla_Franzoesische_Haertungsgrad', 1);
-				IPS_SetVariableProfileText('BWTPerla_Franzoesische_Haertungsgrad', '', '°fH');
+				IPS_SetVariableProfileText('BWTPerla_Franzoesische_Haertungsgrad', '', ' °fH');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_MilliMol_pro_Liter')) {
 				IPS_CreateVariableProfile('BWTPerla_MilliMol_pro_Liter', 1);
-				IPS_SetVariableProfileText('BWTPerla_MilliMol_pro_Liter', '', 'mmol/l');
+				IPS_SetVariableProfileText('BWTPerla_MilliMol_pro_Liter', '', ' mmol/l');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Tage')) {
 				IPS_CreateVariableProfile('BWTPerla_Tage', 1);
-				IPS_SetVariableProfileText('BWTPerla_Tage', '', 'Tage');
+				IPS_SetVariableProfileText('BWTPerla_Tage', '', ' Tage');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Prozent')) {
 				IPS_CreateVariableProfile('BWTPerla_Prozent', 1);
-				IPS_SetVariableProfileText('BWTPerla_Prozent', '', '%');
+				IPS_SetVariableProfileText('BWTPerla_Prozent', '', ' %');
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Gramm')) {
 				IPS_CreateVariableProfile('BWTPerla_Gramm', 1);
-				IPS_SetVariableProfileText('BWTPerla_Gramm', '', 'g');
+				IPS_SetVariableProfileText('BWTPerla_Gramm', '', ' g');
 			}
 		}		
 
