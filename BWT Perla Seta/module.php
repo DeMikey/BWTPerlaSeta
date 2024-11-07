@@ -271,7 +271,7 @@ declare(strict_types=1);
     	#================================================================================================
 
 			//--- Basic Data ---------------------------------------------------------
-			$this->RegisterVariableString( "ActiveErrorIDs", $this->Translate("ActiveErrorIDs"), "BWTPerla_ErrorCode", 0);
+			$this->RegisterVariableInteger("ActiveErrorIDs", $this->Translate("ActiveErrorIDs"), "BWTPerla_ErrorCode", 0);
 			$this->RegisterVariableInteger("BlendedWaterSinceSetup_l", $this->Translate("BlendedWaterSinceSetup_l"), "BWTPerla_Liter", 1 );
 			$this->RegisterVariableInteger("CapacityColumn1_ml_dH", $this->Translate("CapacityColumn1_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 20);
 			$this->RegisterVariableInteger("CapacityColumn2_ml_dH", $this->Translate("CapacityColumn2_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 21 );
