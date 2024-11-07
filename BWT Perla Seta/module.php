@@ -38,7 +38,7 @@ declare(strict_types=1);
     	    $this->registerVariables();
 
         	// Set Timer
-        	if ($this->ReadPropertyBoolean("HTTPUpdateTimer") and $this->ReadPropertyInteger("UpdateTimer") >= 10) {
+        	if ($this->ReadPropertyBoolean("HTTPUpdateTimer")) {
 //            	$this->SetTimerInterval("BWTPerla_UpdateTimer", $this->ReadPropertyInteger("UpdateTimer")*1000);
             	$this->SetTimerInterval("BWTPerla_UpdateTimer", 1800000);
         	} else {
