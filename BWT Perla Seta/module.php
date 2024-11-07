@@ -303,7 +303,7 @@ declare(strict_types=1);
 					$DailyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
 					IPS_SetName($DailyDataCategory, "Verbrauch Tag");   // Kategorie umbenennen
 					IPS_SetParent($DailyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($MonthlyDataCategory, 40); // Kategorie an Position 5 verschieben
+					IPS_SetPosition($DailyDataCategory, 40); // Kategorie an Position 5 verschieben
 				}
 				for ($i = 0; $i <= 23; $i++) {
 					if ($i < 10) {
