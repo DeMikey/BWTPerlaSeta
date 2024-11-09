@@ -304,18 +304,18 @@ declare(strict_types=1);
 					IPS_SetName($DailyDataCategory, "Verbrauch Tag");   // Kategorie umbenennen
 					IPS_SetParent($DailyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 					IPS_SetPosition($DailyDataCategory, 39); // Kategorie an Position 5 verschieben
-				}
-				for ($i = 0; $i <= 23; $i++) {
-					if ($i < 10) {
-						$Hour = "0" . $i;
-					} else {
-						$Hour = $i;
-					}
-					if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
-						IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
-					}
-					if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
-						IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
+					for ($i = 0; $i <= 23; $i++) {
+						if ($i < 10) {
+							$Hour = "0" . $i;
+						} else {
+							$Hour = $i;
+						}
+						if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
+							IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
+						}
+						if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
+							IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
+						}
 					}
 				}
 			} else {
@@ -341,18 +341,18 @@ declare(strict_types=1);
 			if ($this->ReadPropertyBoolean("MonthlyData")) {
 				if (!$MonthlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID)) {
 					$MonthlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
-						IPS_SetName($MonthlyDataCategory, "Verbrauch Monat");   // Kategorie umbenennen
-						IPS_SetParent($MonthlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-						IPS_SetPosition($MonthlyDataCategory, 41); // Kategorie an Position 5 verschieben
-				}
-				for ($i = 1; $i <= 31; $i++) {
-					if ($i < 10) {
-						$Day = "0" . $i;
-					} else {
-						$Day = $i;
-					}
-					if (!@IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
-						IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, "Tag " . $Day, "BWTPerla_Liter", 20 . $i), $MonthlyDataCategory); 
+					IPS_SetName($MonthlyDataCategory, "Verbrauch Monat");   // Kategorie umbenennen
+					IPS_SetParent($MonthlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+					IPS_SetPosition($MonthlyDataCategory, 41); // Kategorie an Position 5 verschieben
+					for ($i = 1; $i <= 31; $i++) {
+						if ($i < 10) {
+							$Day = "0" . $i;
+						} else {
+							$Day = $i;
+						}
+						if (!@IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
+							IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, "Tag " . $Day, "BWTPerla_Liter", 20 . $i), $MonthlyDataCategory); 
+						}
 					}
 				}
 			} else {
@@ -375,18 +375,18 @@ declare(strict_types=1);
 			if ($this->ReadPropertyBoolean("YearlyData")) {
 				if (!$YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID)) {
 					$YearlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
-						IPS_SetName($YearlyDataCategory, "Verbrauch Jahr");   // Kategorie umbenennen
-						IPS_SetParent($YearlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-						IPS_SetPosition($YearlyDataCategory, 43); // Kategorie an Position 5 verschieben
-				}
-				for ($i = 1; $i <= 12; $i++) {
-					if ($i < 10) {
-						$Year = "0" . $i;
-					} else {
-						$Year = $i;
-					}
-					if (!@IPS_GetObjectIDByIdent("Day" . $Year, $YearlyDataCategory)) {
-						IPS_SetParent($this->RegisterVariableInteger("Month" . $Year, "Monat " . $Year, "BWTPerla_Liter", 20 . $i), $YearlyDataCategory); 
+					IPS_SetName($YearlyDataCategory, "Verbrauch Jahr");   // Kategorie umbenennen
+					IPS_SetParent($YearlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+					IPS_SetPosition($YearlyDataCategory, 43); // Kategorie an Position 5 verschieben
+					for ($i = 1; $i <= 12; $i++) {
+						if ($i < 10) {
+							$Year = "0" . $i;
+						} else {
+							$Year = $i;
+						}
+						if (!@IPS_GetObjectIDByIdent("Day" . $Year, $YearlyDataCategory)) {
+							IPS_SetParent($this->RegisterVariableInteger("Month" . $Year, "Monat " . $Year, "BWTPerla_Liter", 20 . $i), $YearlyDataCategory); 
+						}
 					}
 				}
 			} else {
