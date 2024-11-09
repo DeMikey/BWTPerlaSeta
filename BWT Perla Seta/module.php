@@ -274,27 +274,27 @@ declare(strict_types=1);
 			$this->RegisterVariableInteger("BlendedWaterSinceSetup_l", $this->Translate("BlendedWaterSinceSetup_l"), "BWTPerla_Liter", 17 );
 			$this->RegisterVariableInteger("DosingSinceSetup_ml", $this->Translate("DosingSinceSetup_ml"), "BWTPerla_Milliliter", 18 );
 			$this->RegisterVariableInteger("RegenerationCountSinceSetup", $this->Translate("RegenerationCountSinceSetup"), "", 19 );
-			$this->RegisterVariableInteger("CurrentFlowrate_l_h", $this->Translate("CurrentFlowrate_l_h"), "BWTPerla_Liter_pro_Stunde", 20 );
-			$this->RegisterVariableInteger("CapacityColumn1_ml_dH", $this->Translate("CapacityColumn1_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 21);
-			$this->RegisterVariableInteger("CapacityColumn2_ml_dH", $this->Translate("CapacityColumn2_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 22 );
-			$this->RegisterVariableInteger("HardnessIN_CaCO3", $this->Translate("HardnessIN_CaCO3"), "BWTPerla_ppm_CaCO3", 23 );
-			$this->RegisterVariableInteger("HardnessOUT_CaCO3", $this->Translate("HardnessOUT_CaCO3"), "BWTPerla_ppm_CaCO3", 24 );
-			$this->RegisterVariableInteger("HardnessIN_dH", $this->Translate("HardnessIN_dH"), "BWTPerla_Deutsche_Haertungsgrad", 25 );
-			$this->RegisterVariableInteger("HardnessOUT_dH", $this->Translate("HardnessOUT_dH"), "BWTPerla_Deutsche_Haertungsgrad", 26 );
-			$this->RegisterVariableInteger("HardnessIN_fH", $this->Translate("HardnessIN_fH"), "BWTPerla_Franzoesische_Haertungsgrad", 27 );
-			$this->RegisterVariableInteger("HardnessOUT_fH", $this->Translate("HardnessOUT_fH"), "BWTPerla_Franzoesische_Haertungsgrad", 29 );
-			$this->RegisterVariableInteger("HardnessIN_mmol_l", $this->Translate("HardnessIN_mmol_l"), "BWTPerla_MilliMol_pro_Liter", 30 );
-			$this->RegisterVariableInteger("HardnessOUT_mmol_l", $this->Translate("HardnessOUT_mmol_l"), "BWTPerla_MilliMol_pro_Liter", 31 );
-			$this->RegisterVariableString("LastRegenerationColumn1", $this->Translate("LastRegenerationColumn1"), "", 32);
-			$this->RegisterVariableString("LastRegenerationColumn2", $this->Translate("LastRegenerationColumn2"), "", 33);
-			$this->RegisterVariableInteger("RegenerationCounterColumn1", $this->Translate("RegenerationCounterColumn1"), "", 34);
-			$this->RegisterVariableInteger("RegenerationCounterColumn2", $this->Translate("RegenerationCounterColumn2"), "", 35);
-			$this->RegisterVariableInteger("RegenerativLevel", $this->Translate("RegenerativLevel"), "BWTPerla_Prozent", 36);
-			$this->RegisterVariableInteger("RegenerativRemainingDays", $this->Translate("RegenerativRemainingDays"), "BWTPerla_Tage", 37);
-			$this->RegisterVariableInteger("RegenerativSinceSetup_g", $this->Translate("RegenerativSinceSetup_g"), "BWTPerla_Gramm", 38);
-			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 39);
-			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 41);
-			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 43);
+			$this->RegisterVariableInteger("RegenerativLevel", $this->Translate("RegenerativLevel"), "BWTPerla_Prozent", 20);
+			$this->RegisterVariableInteger("RegenerativRemainingDays", $this->Translate("RegenerativRemainingDays"), "BWTPerla_Tage", 21);
+			$this->RegisterVariableInteger("RegenerativSinceSetup_g", $this->Translate("RegenerativSinceSetup_g"), "BWTPerla_Gramm", 22);
+			$this->RegisterVariableInteger("CurrentFlowrate_l_h", $this->Translate("CurrentFlowrate_l_h"), "BWTPerla_Liter_pro_Stunde", 23 );
+			$this->RegisterVariableInteger("CapacityColumn1_ml_dH", $this->Translate("CapacityColumn1_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 24);
+			$this->RegisterVariableInteger("CapacityColumn2_ml_dH", $this->Translate("CapacityColumn2_ml_dH"), "BWTPerla_Milliliter_Deutsche_Haertungsgrad", 25 );
+			$this->RegisterVariableInteger("HardnessIN_CaCO3", $this->Translate("HardnessIN_CaCO3"), "BWTPerla_ppm_CaCO3", 26 );
+			$this->RegisterVariableInteger("HardnessOUT_CaCO3", $this->Translate("HardnessOUT_CaCO3"), "BWTPerla_ppm_CaCO3", 27 );
+			$this->RegisterVariableInteger("HardnessIN_dH", $this->Translate("HardnessIN_dH"), "BWTPerla_Deutsche_Haertungsgrad", 28 );
+			$this->RegisterVariableInteger("HardnessOUT_dH", $this->Translate("HardnessOUT_dH"), "BWTPerla_Deutsche_Haertungsgrad", 29 );
+			$this->RegisterVariableInteger("HardnessIN_fH", $this->Translate("HardnessIN_fH"), "BWTPerla_Franzoesische_Haertungsgrad", 30 );
+			$this->RegisterVariableInteger("HardnessOUT_fH", $this->Translate("HardnessOUT_fH"), "BWTPerla_Franzoesische_Haertungsgrad", 31 );
+			$this->RegisterVariableInteger("HardnessIN_mmol_l", $this->Translate("HardnessIN_mmol_l"), "BWTPerla_MilliMol_pro_Liter", 32 );
+			$this->RegisterVariableInteger("HardnessOUT_mmol_l", $this->Translate("HardnessOUT_mmol_l"), "BWTPerla_MilliMol_pro_Liter", 33 );
+			$this->RegisterVariableString("LastRegenerationColumn1", $this->Translate("LastRegenerationColumn1"), "", 34);
+			$this->RegisterVariableString("LastRegenerationColumn2", $this->Translate("LastRegenerationColumn2"), "", 35);
+			$this->RegisterVariableInteger("RegenerationCounterColumn1", $this->Translate("RegenerationCounterColumn1"), "", 36);
+			$this->RegisterVariableInteger("RegenerationCounterColumn2", $this->Translate("RegenerationCounterColumn2"), "", 37);
+			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 38);
+			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 40);
+			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 42);
 	
 			//---- Statistik
 
@@ -303,7 +303,7 @@ declare(strict_types=1);
 					$DailyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
 					IPS_SetName($DailyDataCategory, "Verbrauch Tag");   // Kategorie umbenennen
 					IPS_SetParent($DailyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($DailyDataCategory, 40); // Kategorie an Position 5 verschieben
+					IPS_SetPosition($DailyDataCategory, 39); // Kategorie an Position 5 verschieben
 				}
 				for ($i = 0; $i <= 23; $i++) {
 					if ($i < 10) {
@@ -343,7 +343,7 @@ declare(strict_types=1);
 					$MonthlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
 						IPS_SetName($MonthlyDataCategory, "Verbrauch Monat");   // Kategorie umbenennen
 						IPS_SetParent($MonthlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-						IPS_SetPosition($MonthlyDataCategory, 42); // Kategorie an Position 5 verschieben
+						IPS_SetPosition($MonthlyDataCategory, 41); // Kategorie an Position 5 verschieben
 				}
 				for ($i = 1; $i <= 31; $i++) {
 					if ($i < 10) {
@@ -377,7 +377,7 @@ declare(strict_types=1);
 					$YearlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
 						IPS_SetName($YearlyDataCategory, "Verbrauch Jahr");   // Kategorie umbenennen
 						IPS_SetParent($YearlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-						IPS_SetPosition($YearlyDataCategory, 44); // Kategorie an Position 5 verschieben
+						IPS_SetPosition($YearlyDataCategory, 43); // Kategorie an Position 5 verschieben
 				}
 				for ($i = 1; $i <= 12; $i++) {
 					if ($i < 10) {
