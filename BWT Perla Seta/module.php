@@ -464,8 +464,8 @@ declare(strict_types=1);
 			if (!IPS_VariableProfileExists('BWTPerla_Switch')) {
 				IPS_CreateVariableProfile('BWTPerla_Switch', 0);
 				IPS_SetVariableProfileIcon('BWTPerla_Switch', '');
-				IPS_SetVariableProfileAssociation("BWTPerla_Switch", 0, $this->Translate("On"), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("BWTPerla_Switch", 1, $this->Translate("Off"), "", 0xFF0000);
+				IPS_SetVariableProfileAssociation("BWTPerla_Switch", 0, $this->Translate("Off"), "", 0x00FF00);
+				IPS_SetVariableProfileAssociation("BWTPerla_Switch", 1, $this->Translate("On"), "", 0xFF0000);
 			}
 
 			if (!IPS_VariableProfileExists('BWTPerla_Liter')) {
