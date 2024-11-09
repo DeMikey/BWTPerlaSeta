@@ -9,7 +9,7 @@ declare(strict_types=1);
 			parent::Create();
 
 			$this->RegisterPropertyString("IPAddress", '0.0.0.0');
-			$this->RegisterPropertyString("Username", '');
+			$this->RegisterPropertyString("Username", 'user');
 			$this->RegisterPropertyString("Password", '');
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
 			$this->RegisterPropertyBoolean("DailyData", false);
