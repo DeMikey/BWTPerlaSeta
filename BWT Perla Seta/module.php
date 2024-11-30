@@ -342,7 +342,7 @@ declare(strict_types=1);
 		}
 
 		#===============================================================================================
-		protected function RegisterYearlyStatisticsVariables(int $Parent) {
+		protected function RegisterYearlyStatisticVariables(int $Parent) {
 		#===============================================================================================
 			for ($i = 1; $i <= 12; $i++) {
 				if ($i < 10) {
@@ -496,7 +496,7 @@ declare(strict_types=1);
 					IPS_SetName($YearlyParent, $this->Translate("ConsumptionYear"));   // Kategorie umbenennen
 					IPS_SetParent($YearlyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 					IPS_SetPosition($YearlyParent, 301); // Kategorie an Position 5 verschieben
-					$this->RegisterYearlyStatisticsVariables($YearlyParent);
+					$this->RegisterYearlyStatisticVariables($YearlyParent);
 				}
 				// löschen Der Yearly Variabeln wenn sie unter der Instanz befinden
 				$this->UnregisterYearlyStatisticVariables($this->InstanceID);
