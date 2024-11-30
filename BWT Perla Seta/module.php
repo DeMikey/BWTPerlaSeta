@@ -333,7 +333,7 @@ declare(strict_types=1);
 				}
 				if ($VarId = @IPS_GetObjectIDByIdent("Day" . $Day, $Parent)) {
 					if ($Parent == $this->InstanceID) {
-						IPS_SetParent($this->UnregisterVariable("Day" . $Day), $Parent);
+						$this->UnregisterVariable("Day" . $Day);
 					} else {
 						IPS_DeleteVariable($VarId);
 					}
