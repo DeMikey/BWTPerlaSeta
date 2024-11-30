@@ -416,9 +416,9 @@ declare(strict_types=1);
 			} else {
 				// Löschen aller Daily Variabeln
 				if ($DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
-					// Daily Kategorie existiert nicht
-					$DailyParent = $this->InstanceID;
-					// Löschen der Katergorie wenn sie existiert
+					// Daily Variabeln löschne
+					$this->UnregisterDailyStatisticVariables($DailyParent);
+					// Löschen der Katergorie
 					IPS_DeleteCategory ($DailyParent); 
 				}
 				// Löschen der Variabeln
