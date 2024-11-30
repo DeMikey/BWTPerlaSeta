@@ -62,12 +62,12 @@
         {
             "type":     "CheckBox",
             "name":     "DailyData",
-            "caption":  "DailyConsumption"
+            "caption":  "ConsumptionDaily"
         },
         {
             "type":     "CheckBox",
             "name":     "MonthlyData",
-            "caption":  "Monats Verbrauch"
+            "caption":  "ConsumptionMontly"
         },
         {
             "type":     "CheckBox",
@@ -85,7 +85,7 @@
         {
             "type": "CheckBox",
             "name": "DebugLog",
-            "caption":  "DebugLog"
+            "caption":  "Debug Log"
         }
     ],
     "actions":
