@@ -292,7 +292,7 @@ declare(strict_types=1);
 				}
 				if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $Parent)) {
 					$this->log("Variabel befinden sich in: " . $Parent);
-					$this->UnregisterVariable($Hour . "00" . $Hour . "29");
+					$this->UnregisterVariable($VarId);
 				}
 				if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
 					$this->UnregisterVariable($Hour . "30" . $Hour . "59");
