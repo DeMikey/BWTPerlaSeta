@@ -422,7 +422,7 @@ declare(strict_types=1);
 					IPS_SetParent($MonthlyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
 					IPS_SetPosition($MonthlyParent, 41); // Kategorie an Position 5 verschieben
 				}
-				$this->UnregisterMontlyStatisticVariables($thist->InstanceID);
+				$this->UnregisterMontlyStatisticVariables($this->InstanceID);
 				$this->RegisterMontlyStatisticVariables($MonthlyParent);
 			} elseif (($this->ReadPropertyBoolean("MonthlyData"))  && (!$this->ReadPropertyBoolean("UseCategory"))) {
 				// Montly Statistic in der Instanz
