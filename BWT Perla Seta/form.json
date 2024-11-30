@@ -55,8 +55,14 @@
         },
         {
             "type":     "CheckBox",
+            "name":     "UseCategory",
+            "caption":  "UseCategory"
+        },
+ 
+        {
+            "type":     "CheckBox",
             "name":     "DailyData",
-            "caption":  "Tages Verbrauch"
+            "caption":  "DailyConsumption"
         },
         {
             "type":     "CheckBox",

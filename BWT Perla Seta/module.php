@@ -12,6 +12,7 @@ declare(strict_types=1);
 			$this->RegisterPropertyString("Username", 'user');
 			$this->RegisterPropertyString("Password", '');
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
+			$this->RegisterPropertyBoolean("UseCategory", false);
 			$this->RegisterPropertyBoolean("DailyData", false);
 			$this->RegisterPropertyBoolean("MonthlyData", false);
 			$this->RegisterPropertyBoolean("YearlyData", false);
@@ -59,8 +60,6 @@ declare(strict_types=1);
 			// HTTP status request
 			$data = $this->SendHTTPCommand('GetCurrentData');
 			$this->log('Empfangene Daten:');
-			$this->log(print_r($data, true));
-			$this->log(print_r(array_keys($data),true));
 			if ($data == false) {
 				IPS_SemaphoreLeave($semaphore);
 				$this->log('Update - Keine Daten empfangen');
@@ -68,7 +67,9 @@ declare(strict_types=1);
 				return false;
 			} else {
 				// set values to variables
-	
+				$this->log(print_r($data, true));
+				$this->log(print_r(array_keys($data),true));
+		
 				//--- Identification
 				$this->SetValue("ActiveErrorIDs", $data['ActiveErrorIDs']);
 				$this->SetValue("BlendedWaterSinceSetup_l", $data['BlendedWaterSinceSetup_l']);
@@ -113,8 +114,12 @@ declare(strict_types=1);
 					$this->log('Update - Semaphore leaved');
 					return false;
 				} else {
-					$DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID);
-					$this->log('Update - Tages Kategorie Id: ' . $DailyDataCategory);
+					if ($this->ReadPropertyBoolean("UseCategory")) {
+						$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
+					} else {
+						$DailyParent = $this->InstanceID;
+					}
+					$this->log('Update - Tages Kategorie Id: ' . $DailyParent);
 					for ($i = 0; $i <= 23; $i++) {
 						if ($i < 10) {
 							$Hour = "0" . $i;
@@ -122,10 +127,10 @@ declare(strict_types=1);
 							$Hour = $i;
 						}
 						$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyParent)) {
 							SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
 						}
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyParent)) {
 							SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
 						}
 					}
@@ -258,6 +263,71 @@ declare(strict_types=1);
         	};
     	}
 
+		#================================================================================================
+		protected function RegisterDailyStatisticVariables(int $Parent){
+		#================================================================================================
+			for ($i = 0; $i <= 23; $i++) {
+				if ($i < 10) {
+					$Hour = "0" . $i;
+				} else {
+					$Hour = $i;
+				}
+				if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $Parent)) {
+					IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $Parent); 
+				}
+				if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
+					IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $Parent); 
+				}
+			}
+		}
+
+		#===============================================================================================
+		protected function UnregisterDailyStatisticVariables(int $Parent) {
+		#===============================================================================================
+			for ($i = 0; $i <= 23; $i++) {
+				if ($i < 10) {
+					$Hour = "0" . $i;
+				} else {
+					$Hour = $i;
+				}
+				if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $Parent)) {
+					IPS_SetParent($this->UnregisterVariable($Hour . "00" . $Hour . "29"), $Parent);
+				}
+				if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
+					IPS_SetParent($this->UnregisterVariable($Hour . "30" . $Hour . "59"), $Parent);
+				}
+			}
+		}
+
+		#================================================================================================
+		protected function RegisterMontlyStatisticVariables(int $Parent) {
+		#================================================================================================
+			for ($i = 1; $i <= 31; $i++) {
+				if ($i < 10) {
+					$Day = "0" . $i;
+				} else {
+					$Day = $i;
+				}
+				if (!@IPS_GetObjectIDByIdent("Day" . $Day, $Parent)) {
+					IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, $this->TRanslate("Day") . " " . $Day, "BWTPerla_Liter", 20 . $i), $Parent); 
+				}
+			}
+		}
+
+		#===============================================================================================
+		protected function UnregisterMontlyStatisticVariables(int $Parent) {
+		#===============================================================================================
+			for ($i = 1; $i <= 31; $i++) {
+				if ($i < 10) {
+					$Day = "0" . $i;
+				} else {
+					$Day = $i;
+				}
+				if (@IPS_GetObjectIDByIdent("Day" . $Day, $Parent)) {
+					IPS_SetParent($this->UnregisterVariable("Day" . $Day), $Parent); 
+				}
+			} 
+		}
 
     	#================================================================================================
 		protected function registerVariables() {
@@ -295,82 +365,85 @@ declare(strict_types=1);
 			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 38);
 			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 40);
 			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 42);
-	
-			//---- Statistik
+			$this->RegisterVariableInteger("WaterConsumption", $this->Translate("WaterConsumption"), "BWTPerla_Liter", 44);
 
-			if ($this->ReadPropertyBoolean("DailyData")) {
-				if (!$DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
-					$DailyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
-					IPS_SetName($DailyDataCategory, "Verbrauch Tag");   // Kategorie umbenennen
-					IPS_SetParent($DailyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($DailyDataCategory, 39); // Kategorie an Position 5 verschieben
-					for ($i = 0; $i <= 23; $i++) {
-						if ($i < 10) {
-							$Hour = "0" . $i;
-						} else {
-							$Hour = $i;
-						}
-						if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
-							IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
-						}
-						if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
-							IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $DailyDataCategory); 
-						}
-					}
+			//---- Variable für Archiv konfigurieren
+			$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
+			if (!AC_GetLoggingStatus ($archiveID, $this->GetIDForIdent("WaterConsumption"))) {
+				AC_SetLoggingStatus($archiveID, $this->GetIDForIdent("WaterConsumption"), true);
+				AC_SetAggregationType($archiveID, $this->GetIDForIdent("WaterConsumption"), 0);
+			}
+
+			//---- Statistik
+			//   Daily
+			if (($this->ReadPropertyBoolean("DailyData")) && ($this->ReadPropertyBoolean("UseCategory"))) {
+				// Daliy Statistik und Kategory
+				// Kategorie wird erstellt wenn sie existiert
+				if (!$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
+					$DailyParent = IPS_CreateCategory();   // Kategorie anlegen
+					IPS_SetIdent($DailyParent, "ConsumptionDay");  //Set Ident
+					IPS_SetName($DailyParent, $this->Translate("ConsumptionDay"));   // Kategorie umbenennen
+					IPS_SetParent($DailyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+					IPS_SetPosition($DailyParent, 39); // Kategorie an Position 5 verschieben
 				}
+				// Löschen der Daily Variabeln in der Instanz
+				$this->UnregisterDailyStatisticVariables($this->InstanceID);
+				// Variablen werden erstellt
+				$this->RegisterDailyStatisticVariables($DailyParent);
+			} elseif (($this->ReadPropertyBoolean("DailyData")) && (!$this->ReadPropertyBoolean("UseCategory"))) {
+				// Daliy Statistik in der Instanz
+				if (!$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
+					// Daily Kategory existiert Variabeln werden gelöscht
+					$this->UnregisterDailyStatisticVariables($DailyParent);
+					// Löschen der Katergorie
+					IPS_DeleteCategory ($DailyParent); 
+				}
+				// Variabeln werden neu in der Instanz registriert
+				$this->RegisterDailyStatisticVariables($this->InstanceID);
+
 			} else {
-				if ($DailyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Tag', $this->InstanceID)) {
-					// Löschen der Variabeln
-					for ($i = 0; $i <= 23; $i++) {
-						if ($i < 10) {
-							$Hour = "0" . $i;
-						} else {
-							$Hour = $i;
-						}
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyDataCategory)) {
-							IPS_DeleteVariable ($VarId); 
-						}
-						if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyDataCategory)) {
-							IPS_DeleteVariable ($VarId);
-						}
-					} 
-					// Löschen der Katergory
-					IPS_DeleteCategory ($DailyDataCategory); 
+				// Löschen aller Daily Variabeln
+				if (!$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
+					// Daily Kategorie existiert nicht
+					$DailyParent = $this->InstanceID;
+				}
+				// Löschen der Variabeln
+				$this->UnregisterDailyStatisticVariables($DailyParent);
+				if (!@IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
+					// Löschen der Katergorie wenn sie existiert
+					IPS_DeleteCategory ($DailyParent); 
 				}
 			}
-			if ($this->ReadPropertyBoolean("MonthlyData")) {
-				if (!$MonthlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID)) {
-					$MonthlyDataCategory = IPS_CreateCategory();   // Kategorie anlegen
-					IPS_SetName($MonthlyDataCategory, "Verbrauch Monat");   // Kategorie umbenennen
-					IPS_SetParent($MonthlyDataCategory, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($MonthlyDataCategory, 41); // Kategorie an Position 5 verschieben
-					for ($i = 1; $i <= 31; $i++) {
-						if ($i < 10) {
-							$Day = "0" . $i;
-						} else {
-							$Day = $i;
-						}
-						if (!@IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
-							IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, "Tag " . $Day, "BWTPerla_Liter", 20 . $i), $MonthlyDataCategory); 
-						}
-					}
+			if (($this->ReadPropertyBoolean("MonthlyData"))  && ($this->ReadPropertyBoolean("UseCategory"))) {
+				if (!$MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
+					$MonthlyParent = IPS_CreateCategory();   // Kategorie anlegen
+					IPS_SetIdent($MonthlyParent, "ConsumptionMonth");  //Set Ident
+					IPS_SetName($MonthlyParent, $this->Translate("ConsumptionMonth"));   // Kategorie umbenennen
+					IPS_SetParent($MonthlyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
+					IPS_SetPosition($MonthlyParent, 41); // Kategorie an Position 5 verschieben
 				}
+				$this->UnregisterMontlyStatisticVariables($thist->InstanceID);
+				$this->RegisterMontlyStatisticVariables($MonthlyParent);
+			} elseif (($this->ReadPropertyBoolean("MonthlyData"))  && (!$this->ReadPropertyBoolean("UseCategory"))) {
+				// Montly Statistic in der Instanz
+				if ($MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
+					// Montly Kategorie existiert alle Variabeln werden gelöscht
+					$this->UnregisterMontlyStatisticVariables($MonthlyParent);
+					// Kategorie wird gelöscht
+					IPS_DeleteCategory($MonthlyParent);
+				}
+				// Montly Variabeln werden in der Intsnat erstellt
+				$this->RegisterMontlyStatisticVariables($this->InstanceID);
 			} else {
-				if ($MonthlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID)) {
-					// Löschen der Variabeln
-					for ($i = 1; $i <= 31; $i++) {
-						if ($i < 10) {
-							$Day = "0" . $i;
-						} else {
-							$Day = $i;
-						}
-						if ($VarId = @IPS_GetObjectIDByIdent("Day" . $Day, $MonthlyDataCategory)) {
-							IPS_DeleteVariable ($VarId); 
-						}
-					} 
-					// Löschen der Katergory
-					IPS_DeleteCategory ($MonthlyDataCategory); 
+				// Alles löschen
+				if ($MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
+					// Montly Kategorie existiert alle Variabeln werden gelöscht
+					$this->UnregisterMontlyStatisticVariables($MonthlyParent);
+					// Kategorie wird gelöscht
+					IPS_DeleteCategory($MonthlyParent);
 				}
+				// Variabeln löschen in der Instanz
+				$this->UnregisterMontlyStatisticVariables($this->InstanceID);
 			}
 			if ($this->ReadPropertyBoolean("YearlyData")) {
 				if (!$YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID)) {

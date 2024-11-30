@@ -11,6 +11,8 @@
             "AutomaticUpdate": "Automatische Updates",
             "UpdateTimer": "Update alle",
             "seconds": "Sekunden",
+            "UseCategory": "Kategorien für Statistk Daten verwenden.",
+            "Daily consumption": "TAgesverbrauch",
 
 			"ActiveErrorIDs": "Active Fehler IDs",
 			"BlendedWaterSinceSetup_l": "Verschnitt Wasser der Einrichtung",
@@ -43,6 +45,10 @@
 			"WaterTreatedCurrentDay_l": "Wasserbehandelt aktueller Tag",
 			"WaterTreatedCurrentMonth_l": "Wasserbehandelt aktueller Monat",
 			"WaterTreatedCurrentYear_l": "Wasserbehandelt aktuelles Jahr",
+            "WaterConsumption": "Wasserverbrauch",
+            "ConsumptionDay": "Verbrauch Tag",
+            "ConsumptionMonth": "Verbrauch Monat",
+            "Day": "Tag",
 
             "On": "Ein",
             "Off": "Aus",
