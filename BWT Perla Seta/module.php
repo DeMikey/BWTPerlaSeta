@@ -518,7 +518,7 @@ declare(strict_types=1);
 					IPS_DeleteCategory ($YearlyParent); 
 				}
 				// Variabeln löschen in der Instanz
-				$this->UnregisterYearlyStatisticsVariables($YearlyParent);
+				$this->UnregisterYearlyStatisticsVariables($this->InstanceID);
 			}
 		}
 
