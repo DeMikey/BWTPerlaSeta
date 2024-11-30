@@ -357,7 +357,7 @@ declare(strict_types=1);
 		}
 
 		#===============================================================================================
-		protected function UnregisterYearlyStatisticsVariables(int $Parent) {
+		protected function UnregisterYearlyStatisticVariables(int $Parent) {
 		#===============================================================================================
 			for ($i = 1; $i <= 12; $i++) {
 				if ($i < 10) {
@@ -499,6 +499,7 @@ declare(strict_types=1);
 					$this->RegisterYearlyStatisticsVariables($YearlyParent);
 				}
 				// löschen Der Yearly Variabeln wenn sie unter der Instanz befinden
+				$this->UnregisterYearlyStatisticVariables($this->InstanceID);
 			} elseif (($this->ReadPropertyBoolean("YearlyData")) && (!$this->ReadPropertyBoolean("UseCategory"))) {
 				// Yearly Statistic in der Instanz
 				if ($YearlyParent = @IPS_GetObjectIDByIdent('ConsumptionYear', $this->InstanceID)) {
@@ -513,12 +514,12 @@ declare(strict_types=1);
 			// Alles löschen
 				if ($YearlyParent = @IPS_GetObjectIDByIdent('ConsumptionYear', $this->InstanceID)) {
 					// Löschen der Variabeln
-					$this->UnregisterYearlyStatisticsVariables($YearlyParent);
+					$this->UnregisterYearlyStatisticVariables($YearlyParent);
 					// Löschen der Katergory
 					IPS_DeleteCategory ($YearlyParent); 
 				}
 				// Variabeln löschen in der Instanz
-				$this->UnregisterYearlyStatisticsVariables($this->InstanceID);
+				$this->UnregisterYearlyStatisticVariables($this->InstanceID);
 			}
 		}
 
