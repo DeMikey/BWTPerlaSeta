@@ -291,11 +291,18 @@ declare(strict_types=1);
 					$Hour = $i;
 				}
 				if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $Parent)) {
-					$this->log("Variabel befinden sich in: " . $Parent);
-					$this->UnregisterVariable($VarId);
+					if ($Parent == $this->InstanceID) {
+						$this->UnregisterVariable($Hour . "00" . $Hour . "29");
+					} else {
+						IPS_DeleteVariable($VarId);
+					}
 				}
 				if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
-					$this->UnregisterVariable($Hour . "30" . $Hour . "59");
+					if ($Parent == $this->InstanceID) {
+						$this->UnregisterVariable($Hour . "30" . $Hour . "59");
+					} else {
+						IPS_DeleteVariable($VarId);
+					}
 				}
 			}
 		}
