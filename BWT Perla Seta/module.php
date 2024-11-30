@@ -273,10 +273,10 @@ declare(strict_types=1);
 					$Hour = $i;
 				}
 				if (!@IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $Parent)) {
-					IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 10 . $i), $Parent); 
+					IPS_SetParent($this->RegisterVariableInteger($Hour . "00" . $Hour . "29", $Hour . ":00-" . $Hour . ":29", "BWTPerla_Liter", 100 . $i), $Parent); 
 				}
 				if (!@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
-					IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 10 . $i), $Parent); 
+					IPS_SetParent($this->RegisterVariableInteger($Hour . "30" . $Hour . "59", $Hour . ":30-" . $Hour . "-59", "BWTPerla_Liter", 100 . $i), $Parent); 
 				}
 			}
 		}
@@ -317,7 +317,7 @@ declare(strict_types=1);
 					$Day = $i;
 				}
 				if (!@IPS_GetObjectIDByIdent("Day" . $Day, $Parent)) {
-					IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, $this->TRanslate("Day") . " " . $Day, "BWTPerla_Liter", 20 . $i), $Parent); 
+					IPS_SetParent($this->RegisterVariableInteger("Day" . $Day, $this->TRanslate("Day") . " " . $Day, "BWTPerla_Liter", 200 . $i), $Parent); 
 				}
 			}
 		}
@@ -374,10 +374,10 @@ declare(strict_types=1);
 			$this->RegisterVariableString("LastRegenerationColumn2", $this->Translate("LastRegenerationColumn2"), "", 35);
 			$this->RegisterVariableInteger("RegenerationCounterColumn1", $this->Translate("RegenerationCounterColumn1"), "", 36);
 			$this->RegisterVariableInteger("RegenerationCounterColumn2", $this->Translate("RegenerationCounterColumn2"), "", 37);
-			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 38);
-			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 40);
-			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 42);
-			$this->RegisterVariableInteger("WaterConsumption", $this->Translate("WaterConsumption"), "BWTPerla_Liter", 44);
+			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 100);
+			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 200);
+			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 300);
+			$this->RegisterVariableInteger("WaterConsumption", $this->Translate("WaterConsumption"), "BWTPerla_Liter", 500);
 
 			//---- Variable für Archiv konfigurieren
 			$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
