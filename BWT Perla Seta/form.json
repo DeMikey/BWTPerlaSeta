@@ -72,7 +72,7 @@
         {
             "type":     "CheckBox",
             "name":     "YearlyData",
-            "caption":  "Jahres Verbrauch"
+            "caption":  "ConsumptionYear"
         },
         {
             "type": "Label",

@@ -48,7 +48,9 @@
             "WaterConsumption": "Wasserverbrauch",
             "ConsumptionDay": "Verbrauch Tag",
             "ConsumptionMonth": "Verbrauch Monat",
+            "ConsumptionYear": "Verbrauch Jahr",
             "Day": "Tag",
+            "Month": "Monat",
 
             "On": "Ein",
             "Off": "Aus",
