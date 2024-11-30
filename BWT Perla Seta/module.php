@@ -295,7 +295,7 @@ declare(strict_types=1);
 					$this->UnregisterVariable($Hour . "00" . $Hour . "29");
 				}
 				if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
-					IPS_SetParent($this->UnregisterVariable($Hour . "30" . $Hour . "59"), $Parent);
+					$this->UnregisterVariable($Hour . "30" . $Hour . "59");
 				}
 			}
 		}
