@@ -404,7 +404,7 @@ declare(strict_types=1);
 				$this->RegisterDailyStatisticVariables($DailyParent);
 			} elseif (($this->ReadPropertyBoolean("DailyData")) && (!$this->ReadPropertyBoolean("UseCategory"))) {
 				// Daliy Statistik in der Instanz
-				if (!$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
+				if ($DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
 					// Daily Kategory existiert Variabeln werden gelöscht
 					$this->UnregisterDailyStatisticVariables($DailyParent);
 					// Löschen der Katergorie
