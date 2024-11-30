@@ -62,7 +62,7 @@
         {
             "type":     "CheckBox",
             "name":     "DailyData",
-            "caption":  "ConsumptionDaily"
+            "caption":  "ConsumptionDay"
         },
         {
             "type":     "CheckBox",
