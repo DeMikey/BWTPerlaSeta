@@ -297,7 +297,7 @@ declare(strict_types=1);
 						IPS_DeleteVariable($VarId);
 					}
 				}
-				if ($VarId =@IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
+				if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $Parent)) {
 					if ($Parent == $this->InstanceID) {
 						$this->UnregisterVariable($Hour . "30" . $Hour . "59");
 					} else {
@@ -331,8 +331,12 @@ declare(strict_types=1);
 				} else {
 					$Day = $i;
 				}
-				if (@IPS_GetObjectIDByIdent("Day" . $Day, $Parent)) {
-					IPS_SetParent($this->UnregisterVariable("Day" . $Day), $Parent); 
+				if ($varId = @IPS_GetObjectIDByIdent("Day" . $Day, $Parent)) {
+					if ($Parent == $this->InstanceID) {
+						IPS_SetParent($this->UnregisterVariable("Day" . $Day), $Parent);
+					} else {
+						IPS_DeleteVariable($VarId);
+					}
 				}
 			} 
 		}
@@ -411,16 +415,14 @@ declare(strict_types=1);
 
 			} else {
 				// Löschen aller Daily Variabeln
-				if (!$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
+				if ($DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
 					// Daily Kategorie existiert nicht
 					$DailyParent = $this->InstanceID;
-				}
-				// Löschen der Variabeln
-				$this->UnregisterDailyStatisticVariables($DailyParent);
-				if (!@IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
 					// Löschen der Katergorie wenn sie existiert
 					IPS_DeleteCategory ($DailyParent); 
 				}
+				// Löschen der Variabeln
+				$this->UnregisterDailyStatisticVariables($this->InstanceID);
 			}
 			if (($this->ReadPropertyBoolean("MonthlyData"))  && ($this->ReadPropertyBoolean("UseCategory"))) {
 				if (!$MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
