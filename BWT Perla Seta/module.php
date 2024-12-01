@@ -105,35 +105,47 @@ declare(strict_types=1);
 				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
 				$this->SetValue("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
 			}
+			// Get Daily Data
+			$data = $this->SendHTTPCommand('GetDailyData');
+			if ($data == false) {
+				IPS_SemaphoreLeave($semaphore);
+				$this->log('Update - Keine Tages Ststistik Daten empfangen');
+				$this->log('Update - Semaphore leaved');
+				return false;
 			if ($this->ReadPropertyBoolean("DailyData")) {
-				// Get Health Data
-				$data = $this->SendHTTPCommand('GetDailyData');
-				if ($data == false) {
-					IPS_SemaphoreLeave($semaphore);
-					$this->log('Update - Keine Tages Ststistik Daten empfangen');
-					$this->log('Update - Semaphore leaved');
-					return false;
+				if ($this->ReadPropertyBoolean("UseCategory")) {
+					$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
 				} else {
-					if ($this->ReadPropertyBoolean("UseCategory")) {
-						$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
+					$DailyParent = $this->InstanceID;
+				}
+				$this->log('Update - Tages Kategorie Id: ' . $DailyParent);
+				for ($i = 0; $i <= 23; $i++) {
+					if ($i < 10) {
+						$Hour = "0" . $i;
 					} else {
-						$DailyParent = $this->InstanceID;
+						$Hour = $i;
 					}
-					$this->log('Update - Tages Kategorie Id: ' . $DailyParent);
-					for ($i = 0; $i <= 23; $i++) {
-						if ($i < 10) {
-							$Hour = "0" . $i;
-						} else {
-							$Hour = $i;
-						}
-						$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyParent)) {
-							SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
-						}
-						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyParent)) {
-							SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
-						}
+					$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
+					if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyParent)) {
+						SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
 					}
+					if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyParent)) {
+						SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
+					}
+				}
+			} else {
+				// Die letzte halbe Stunde ins Archiv hinzufügen
+				$DateTime = getdate((getdate()[0]) - 1800);
+				if ($DateTime['minutes'] <= 30) {
+					$this->log("Archive Daten " . $DateTime['hours'] . "00_" . $DateTime['hours'] . "29: " . $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]);
+					$DateTime['minutes'] = 30;
+					$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
+					AC_AddLoggedValues($archiveID, $this->GetIDForIdent("WaterConsumption"), [
+						[
+						  'TimeStamp' => $DateTime[0],
+						  'Value' => $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]
+						]
+					]);
 				}
 			}
 			if ($this->ReadPropertyBoolean("MonthlyData")) {
