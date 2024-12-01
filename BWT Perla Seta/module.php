@@ -112,28 +112,29 @@ declare(strict_types=1);
 				$this->log('Update - Keine Tages Ststistik Daten empfangen');
 				$this->log('Update - Semaphore leaved');
 				return false;
-			if ($this->ReadPropertyBoolean("DailyData")) {
-				if ($this->ReadPropertyBoolean("UseCategory")) {
-					$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
-				} else {
-					$DailyParent = $this->InstanceID;
-				}
-				$this->log('Update - Tages Kategorie Id: ' . $DailyParent);
-				for ($i = 0; $i <= 23; $i++) {
-					if ($i < 10) {
-						$Hour = "0" . $i;
-					} else {
-						$Hour = $i;
-					}
-					$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
-					if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyParent)) {
-						SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
-					}
-					if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyParent)) {
-						SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
-					}
-				}
 			} else {
+				if ($this->ReadPropertyBoolean("DailyData")) {
+					if ($this->ReadPropertyBoolean("UseCategory")) {
+						$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
+					} else {
+						$DailyParent = $this->InstanceID;
+					}
+					$this->log('Update - Tages Kategorie Id: ' . $DailyParent);
+					for ($i = 0; $i <= 23; $i++) {
+						if ($i < 10) {
+							$Hour = "0" . $i;
+						} else {
+							$Hour = $i;
+						}
+						$this->log("Daily key: " . $Hour .  "00_" . $Hour . "29_l");
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "00" . $Hour . "29", $DailyParent)) {
+							SetValue($VarId, $data[$Hour .  "00_" . $Hour . "29_l"]);
+						}
+						if ($VarId = @IPS_GetObjectIDByIdent($Hour . "30" . $Hour . "59", $DailyParent)) {
+							SetValue($VarId, $data[$Hour .  "30_" . $Hour . "59_l"]);
+						}
+					}
+				}
 				// Die letzte halbe Stunde ins Archiv hinzufügen
 				$DateTime = getdate((getdate()[0]) - 1800);
 				if ($DateTime['minutes'] <= 30) {
