@@ -103,7 +103,7 @@ declare(strict_types=1);
 				$this->SetValue("ShowError", $data['ShowError']);
 				// Statsistik Daten erheben
 				$DateTime = getdate();
-				if (($DateTiem['hours'] <= 0) && ($DateTime['minutes'] <= 30)) {
+				if (($DateTime['hours'] <= 0) && ($DateTime['minutes'] <= 30)) {
 					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l']);
 				} else {
 					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l'] - $this->GetValueInteger("WaterTreatedCurrentDay_l"));
