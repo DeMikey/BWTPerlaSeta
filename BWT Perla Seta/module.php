@@ -101,6 +101,13 @@ declare(strict_types=1);
 				$this->SetValue("RegenerativRemainingDays", $data['RegenerativRemainingDays']);
 				$this->SetValue("RegenerativSinceSetup_g", $data['RegenerativSinceSetup_g']);
 				$this->SetValue("ShowError", $data['ShowError']);
+				// Statsistik Daten erheben
+				$DateTime = getdate();
+				if (($DateTiem['hours'] <= 0) && ($DateTime['minutes'] <= 30)) {
+					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l']);
+				} else {
+					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l'] - $this->GetValueInteger("WaterTreatedCurrentDay_l"));
+				}
 				$this->SetValue("WaterTreatedCurrentDay_l", $data['WaterTreatedCurrentDay_l']);
 				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
 				$this->SetValue("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
@@ -136,18 +143,18 @@ declare(strict_types=1);
 					}
 				}
 				// Die letzte halbe Stunde ins Archiv hinzufügen
-				$DateTime = getdate((getdate()[0]) - 1800);
-				if ($DateTime['minutes'] <= 30) {
-					$this->log("Archive Daten " . $DateTime['hours'] . "00_" . $DateTime['hours'] . "29: " . $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]);
-					$DateTime['minutes'] = 30;
-					$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
-					AC_AddLoggedValues($archiveID, $this->GetIDForIdent("WaterConsumption"), [
-						[
-						  'TimeStamp' => $DateTime[0],
-						  'Value' => $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]
-						]
-					]);
-				}
+#				$DateTime = getdate((getdate()[0]) - 1800);
+#				if ($DateTime['minutes'] <= 30) {
+#					$this->log("Archive Daten " . $DateTime['hours'] . "00_" . $DateTime['hours'] . "29: " . $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]);
+#					$DateTime['minutes'] = 30;
+#					$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
+#					AC_AddLoggedValues($archiveID, $this->GetIDForIdent("WaterConsumption"), [
+#						[
+#						  'TimeStamp' => $DateTime[0],
+#						  'Value' => $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]
+#						]
+#					]);
+#				}
 			}
 			if ($this->ReadPropertyBoolean("MonthlyData")) {
 				// Get Health Data
