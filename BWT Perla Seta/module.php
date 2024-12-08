@@ -106,7 +106,7 @@ declare(strict_types=1);
 				if (($DateTime['hours'] <= 0) && ($DateTime['minutes'] <= 30)) {
 					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l']);
 				} else {
-					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l'] - $this->GetValueInteger("WaterTreatedCurrentDay_l"));
+					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l'] - $this->GetValue("WaterTreatedCurrentDay_l"));
 				}
 				$this->SetValue("WaterTreatedCurrentDay_l", $data['WaterTreatedCurrentDay_l']);
 				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
