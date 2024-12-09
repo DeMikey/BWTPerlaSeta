@@ -470,7 +470,7 @@ declare(strict_types=1);
 				}
 			} else {
 				// Löschen der Yearly Variabeln
-				if ($YearlyParent = $this->GetIDForIdent('WaterTreatedCurrentYear_l') {
+				if ($YearlyParent = $this->GetIDForIdent('WaterTreatedCurrentYear_l')) {
 					// Löschen der Variabeln
 					$this->UnregisterYearlyStatisticVariables($YearlyParent);
 				}
