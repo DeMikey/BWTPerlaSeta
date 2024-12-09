@@ -162,7 +162,7 @@ declare(strict_types=1);
 					$this->log('Update - Semaphore leaved');
 					return false;
 				} else {
-					$MontlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Monat', $this->InstanceID);
+					$MontlyDataCategory = $this->GetIDForIdent('WaterTreatedCurrentMonth_l');
 					$this->log('Update - Monats Kategorie Id: ' . $MontlyDataCategory);
 					for ($i = 1; $i <= 31; $i++) {
 						if ($i < 10) {
@@ -186,7 +186,7 @@ declare(strict_types=1);
 					$this->log('Update - Semaphore leaved');
 					return false;
 				} else {
-					$YearlyDataCategory = @IPS_GetCategoryIDByName('Verbrauch Jahr', $this->InstanceID);
+					$YearlyDataCategory = $this->GetIDForIdent('WaterTreatedCurrentYear_l');
 					$this->log('Update - Jahres Kategorie Id: ' . $YearlyDataCategory);
 					for ($i = 1; $i <= 12; $i++) {
 						if ($i < 10) {
@@ -201,8 +201,6 @@ declare(strict_types=1);
 					}
 				}
 			}
-			// Set Timer
-	
 			IPS_SemaphoreLeave($semaphore);
 			$this->log('Update - Semaphore leaved');
 		}
@@ -451,68 +449,31 @@ declare(strict_types=1);
 					$this->UnregisterDailyStatisticVariables($DailyParent);
 				}
 			}
-			if (($this->ReadPropertyBoolean("MonthlyData")) && ($this->ReadPropertyBoolean("UseCategory"))) {
-				if (!$MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
-					$MonthlyParent = IPS_CreateCategory();   // Kategorie anlegen
-					IPS_SetIdent($MonthlyParent, "ConsumptionMonth");  //Set Ident
-					IPS_SetName($MonthlyParent, $this->Translate("ConsumptionMonth"));   // Kategorie umbenennen
-					IPS_SetParent($MonthlyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($MonthlyParent, 201); // Kategorie an Position 5 verschieben
+			// Monthly Statistik
+			if ($this->ReadPropertyBoolean("MonthlyData")) {
+				if ($MonthlyParent = $this->GetIDForIdent('WaterTreatedCurrentMonth_l')) {
+					// Variabeln werden erstellt
 					$this->RegisterMontlyStatisticVariables($MonthlyParent);
 				}
-				$this->UnregisterMontlyStatisticVariables($this->InstanceID);
-			} elseif (($this->ReadPropertyBoolean("MonthlyData"))  && (!$this->ReadPropertyBoolean("UseCategory"))) {
-				// Montly Statistic in der Instanz
-				if ($MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
-					// Montly Kategorie existiert alle Variabeln werden gelöscht
-					$this->UnregisterMontlyStatisticVariables($MonthlyParent);
-					// Kategorie wird gelöscht
-					IPS_DeleteCategory($MonthlyParent);
-				}
-				// Montly Variabeln werden in der Intsnat erstellt
-				$this->RegisterMontlyStatisticVariables($this->InstanceID);
 			} else {
-				// Alles löschen
-				if ($MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
-					// Montly Kategorie existiert alle Variabeln werden gelöscht
+				// Löschen der Montly Variabeln
+				if ($MonthlyParent = $this->GetIDForIdent('WaterTreatedCurrentMonth_l')) {
+					// Variabeln werden gelöscht
 					$this->UnregisterMontlyStatisticVariables($MonthlyParent);
-					// Kategorie wird gelöscht
-					IPS_DeleteCategory($MonthlyParent);
 				}
-				// Variabeln löschen in der Instanz
-				$this->UnregisterMontlyStatisticVariables($this->InstanceID);
 			}
-			if (($this->ReadPropertyBoolean("YearlyData")) && ($this->ReadPropertyBoolean("UseCategory"))) {
-				if (!$YearlyParent = @IPS_GetObjectIDByIdent('ConsumptionYear', $this->InstanceID)) {
-					$YearlyParent = IPS_CreateCategory();   // Kategorie anlegen
-					IPS_SetIdent($YearlyParent, "ConsumptionYear");  //Set Ident
-					IPS_SetName($YearlyParent, $this->Translate("ConsumptionYear"));   // Kategorie umbenennen
-					IPS_SetParent($YearlyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($YearlyParent, 301); // Kategorie an Position 5 verschieben
+			// Yearly Statistick
+			if ($this->ReadPropertyBoolean("YearlyData")) {
+				if ($YearlyParent = $this->GetIDForIdent('WaterTreatedCurrentYear_l')) {
+					// Variabeln erstellen
 					$this->RegisterYearlyStatisticVariables($YearlyParent);
 				}
-				// löschen Der Yearly Variabeln wenn sie unter der Instanz befinden
-				$this->UnregisterYearlyStatisticVariables($this->InstanceID);
-			} elseif (($this->ReadPropertyBoolean("YearlyData")) && (!$this->ReadPropertyBoolean("UseCategory"))) {
-				// Yearly Statistic in der Instanz
-				if ($YearlyParent = @IPS_GetObjectIDByIdent('ConsumptionYear', $this->InstanceID)) {
-					// yearly Kategorie existiert alle Variabeln werden gelöscht
-					$this->UnregisterYearlyStatisticVariables($YearlyParent);
-					// Kategorie wird gelöscht
-					IPS_DeleteCategory($YearlyParent);
-				}
-				// Yearly Variabeln werden in der Intsnat erstellt
-				$this->RegisterYearlyStatisticVariables($this->InstanceID);
 			} else {
-			// Alles löschen
-				if ($YearlyParent = @IPS_GetObjectIDByIdent('ConsumptionYear', $this->InstanceID)) {
+				// Löschen der Yearly Variabeln
+				if ($YearlyParent = $this->GetIDForIdent('WaterTreatedCurrentYear_l') {
 					// Löschen der Variabeln
 					$this->UnregisterYearlyStatisticVariables($YearlyParent);
-					// Löschen der Katergory
-					IPS_DeleteCategory ($YearlyParent); 
 				}
-				// Variabeln löschen in der Instanz
-				$this->UnregisterYearlyStatisticVariables($this->InstanceID);
 			}
 		}
 
