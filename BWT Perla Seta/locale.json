@@ -11,7 +11,6 @@
             "AutomaticUpdate": "Automatische Updates",
             "UpdateTimer": "Update alle",
             "seconds": "Sekunden",
-            "UseCategory": "Kategorien für Statistk Daten verwenden.",
             "Daily consumption": "TAgesverbrauch",
 
 			"ActiveErrorIDs": "Active Fehler IDs",
@@ -46,9 +45,6 @@
 			"WaterTreatedCurrentMonth_l": "Wasserbehandelt aktueller Monat",
 			"WaterTreatedCurrentYear_l": "Wasserbehandelt aktuelles Jahr",
             "WaterConsumption": "Wasserverbrauch",
-            "ConsumptionDay": "Verbrauch Tag",
-            "ConsumptionMonth": "Verbrauch Monat",
-            "ConsumptionYear": "Verbrauch Jahr",
             "Day": "Tag",
             "Month": "Monat",
 
