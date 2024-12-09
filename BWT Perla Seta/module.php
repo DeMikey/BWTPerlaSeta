@@ -108,19 +108,20 @@ declare(strict_types=1);
 				} else {
 					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l'] - $this->GetValue("WaterTreatedCurrentDay_l"));
 				}
+				// Ende Statistik Daten
 				$this->SetValue("WaterTreatedCurrentDay_l", $data['WaterTreatedCurrentDay_l']);
 				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
 				$this->SetValue("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
 			}
 			// Get Daily Data
-			$data = $this->SendHTTPCommand('GetDailyData');
-			if ($data == false) {
-				IPS_SemaphoreLeave($semaphore);
-				$this->log('Update - Keine Tages Ststistik Daten empfangen');
-				$this->log('Update - Semaphore leaved');
-				return false;
-			} else {
-				if ($this->ReadPropertyBoolean("DailyData")) {
+			if ($this->ReadPropertyBoolean("DailyData")) {
+				$data = $this->SendHTTPCommand('GetDailyData');
+				if ($data == false) {
+					IPS_SemaphoreLeave($semaphore);
+					$this->log('Update - Keine Tages Ststistik Daten empfangen');
+					$this->log('Update - Semaphore leaved');
+					return false;
+				} else {
 					if ($this->ReadPropertyBoolean("UseCategory")) {
 						$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
 					} else {
@@ -441,42 +442,18 @@ declare(strict_types=1);
 			}
 
 			//---- Statistik
-			//   Daily
-			if (($this->ReadPropertyBoolean("DailyData")) && ($this->ReadPropertyBoolean("UseCategory"))) {
-				// Daliy Statistik und Kategory
-				// Kategorie wird erstellt wenn sie existiert
-				if (!$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
-					$DailyParent = IPS_CreateCategory();   // Kategorie anlegen
-					IPS_SetIdent($DailyParent, "ConsumptionDay");  //Set Ident
-					IPS_SetName($DailyParent, $this->Translate("ConsumptionDay"));   // Kategorie umbenennen
-					IPS_SetParent($DailyParent, $this->InstanceID); // Kategorie einsortieren unter der BWT Instanz
-					IPS_SetPosition($DailyParent, 39); // Kategorie an Position 5 verschieben
+			// Daliy Statistik 
+			if ($this->ReadPropertyBoolean("DailyData")) {
+				// Erstellen der Daily Variabeln
+				if ($DailyParent = $this->GetIDForIdent("WaterTreatedCurrentDay_l")) {
 					// Variablen werden erstellt
 					$this->RegisterDailyStatisticVariables($DailyParent);
 				}
-				// Löschen der Daily Variabeln in der Instanz
-				$this->UnregisterDailyStatisticVariables($this->InstanceID);
-			} elseif (($this->ReadPropertyBoolean("DailyData")) && (!$this->ReadPropertyBoolean("UseCategory"))) {
-				// Daliy Statistik in der Instanz
-				if ($DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
-					// Daily Kategory existiert Variabeln werden gelöscht
-					$this->UnregisterDailyStatisticVariables($DailyParent);
-					// Löschen der Katergorie
-					IPS_DeleteCategory ($DailyParent); 
-				}
-				// Variabeln werden neu in der Instanz registriert
-				$this->RegisterDailyStatisticVariables($this->InstanceID);
-
 			} else {
-				// Löschen aller Daily Variabeln
-				if ($DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID)) {
-					// Daily Variabeln löschne
+				// Löschen der Daily Variabeln
+				if ($DailyParent = $this->GetIDForIdent("WaterTreatedCurrentDay_l")) {
 					$this->UnregisterDailyStatisticVariables($DailyParent);
-					// Löschen der Katergorie
-					IPS_DeleteCategory ($DailyParent); 
 				}
-				// Löschen der Variabeln
-				$this->UnregisterDailyStatisticVariables($this->InstanceID);
 			}
 			if (($this->ReadPropertyBoolean("MonthlyData")) && ($this->ReadPropertyBoolean("UseCategory"))) {
 				if (!$MonthlyParent = @IPS_GetObjectIDByIdent('ConsumptionMonth', $this->InstanceID)) {
