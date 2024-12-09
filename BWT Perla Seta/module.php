@@ -122,11 +122,7 @@ declare(strict_types=1);
 					$this->log('Update - Semaphore leaved');
 					return false;
 				} else {
-					if ($this->ReadPropertyBoolean("UseCategory")) {
-						$DailyParent = @IPS_GetObjectIDByIdent("ConsumptionDay", $this->InstanceID);
-					} else {
-						$DailyParent = $this->InstanceID;
-					}
+					$DailyParent = $this->GetIDForIdent('WaterTreatedCurrentDay_l');
 					$this->log('Update - Tages Kategorie Id: ' . $DailyParent);
 					for ($i = 0; $i <= 23; $i++) {
 						if ($i < 10) {
