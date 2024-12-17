@@ -225,7 +225,7 @@ declare(strict_types=1);
 					CURLOPT_TIMEOUT => 30
 				]);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				$jresponseson = curl_exec($ch);
+				$response = curl_exec($ch);
 //				if (!$response = curl_exec($ch)) {
 //					$this->log((curl_error($ch)));
 //					$this->SetStatus(202); // No Device at IP
