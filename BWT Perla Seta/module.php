@@ -39,7 +39,7 @@ declare(strict_types=1);
 
         	// Set Timer
         	if ($this->ReadPropertyBoolean("HTTPUpdateTimer")) {
-            	$this->SetTimerInterval("BWTPerla_UpdateTimer", 1800000);
+            	$this->SetTimerInterval("BWTPerla_UpdateTimer", 60000);
         	} else {
             	$this->SetTimerInterval("BWTPerla_UpdateTimer", 0);
         	}
@@ -101,14 +101,6 @@ declare(strict_types=1);
 				$this->SetValue("RegenerativRemainingDays", $data['RegenerativRemainingDays']);
 				$this->SetValue("RegenerativSinceSetup_g", $data['RegenerativSinceSetup_g']);
 				$this->SetValue("ShowError", $data['ShowError']);
-				// Statsistik Daten erheben
-				$DateTime = getdate();
-				if (($DateTime['hours'] <= 0) && ($DateTime['minutes'] <= 30)) {
-					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l']);
-				} else {
-					$this->SetValue("WaterConsumption",  $data['WaterTreatedCurrentDay_l'] - $this->GetValue("WaterTreatedCurrentDay_l"));
-				}
-				// Ende Statistik Daten
 				$this->SetValue("WaterTreatedCurrentDay_l", $data['WaterTreatedCurrentDay_l']);
 				$this->SetValue("WaterTreatedCurrentMonth_l", $data['WaterTreatedCurrentMonth_l']);
 				$this->SetValue("WaterTreatedCurrentYear_l", $data['WaterTreatedCurrentYear_l']);
@@ -139,19 +131,6 @@ declare(strict_types=1);
 						}
 					}
 				}
-				// Die letzte halbe Stunde ins Archiv hinzufügen
-#				$DateTime = getdate((getdate()[0]) - 1800);
-#				if ($DateTime['minutes'] <= 30) {
-#					$this->log("Archive Daten " . $DateTime['hours'] . "00_" . $DateTime['hours'] . "29: " . $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]);
-#					$DateTime['minutes'] = 30;
-#					$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
-#					AC_AddLoggedValues($archiveID, $this->GetIDForIdent("WaterConsumption"), [
-#						[
-#						  'TimeStamp' => $DateTime[0],
-#						  'Value' => $data[$DateTime['hours'] . "00_" . $DateTime['hours'] . "29_l"]
-#						]
-#					]);
-#				}
 			}
 			if ($this->ReadPropertyBoolean("MonthlyData")) {
 				// Get Health Data
@@ -246,12 +225,14 @@ declare(strict_types=1);
 					CURLOPT_TIMEOUT => 30
 				]);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				//  $json = curl_exec($ch);
-				if (! $json = curl_exec($ch)) {
-					$this->log((curl_error($ch)));
-					curl_close($ch);
-					return false;
-				}
+				$jresponseson = curl_exec($ch);
+//				if (!$response = curl_exec($ch)) {
+//					$this->log((curl_error($ch)));
+//					$this->SetStatus(202); // No Device at IP
+//					$this->log('SendHTTPCommand - End');
+//					curl_close($ch);
+//					return false;
+//				}
 				curl_close($ch);
 				$this->log('Http Request finished');
 			} catch (Exception $e) {
@@ -260,14 +241,25 @@ declare(strict_types=1);
 				$this->SetStatus(203); // no valid IP configured
 				return false;
 			};
-			if (strlen($json) > 3) {
+			if (curl_error($ch)) {
+				$this->log((curl_error($ch)));
+				$this->SetStatus(202); // No Device at IP
+				$this->log('SendHTTPCommand - End');
+				return false;
+			}
+			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+			$header = substr($response, 0, $header_size);
+			$body = substr($response, $header_size);
+			$this->log("Header: " . $header);
+			$this->log("Body: " . $body);
+			if (strlen($response) > 3) {
 				$this->SetStatus(102); // BWT Perl found
 			} else {
 				$this->SetStatus(202); // No Device at IP
 			}
-			$this->log("Response: ".$json);
+			$this->log("Response: ".$response);
         	$this->log('SendHTTPCommand - End');
-			return json_decode(utf8_encode($json), true, 1000, JSON_INVALID_UTF8_IGNORE);
+			return json_decode(utf8_encode($jsresponseon), true, 1000, JSON_INVALID_UTF8_IGNORE);
     	}
 
     	#================================================================================================
@@ -279,7 +271,7 @@ declare(strict_types=1);
     	}
 
 		#================================================================================================
-		protected function RegisterDailyStatisticVariables(int $Parent){
+		private function RegisterDailyStatisticVariables(int $Parent){
 		#================================================================================================
 			for ($i = 0; $i <= 23; $i++) {
 				if ($i < 10) {
