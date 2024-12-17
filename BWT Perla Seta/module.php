@@ -249,19 +249,22 @@ declare(strict_types=1);
 				$this->log('SendHTTPCommand - End');
 				return false;
 			}
+			$this->log("Response: " . $response);
 			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 			$header = substr($response, 0, $header_size);
 			$body = substr($response, $header_size);
 			$this->log("Header: " . $header);
 			$this->log("Body: " . $body);
-			if (strlen($response) > 3) {
+			if (curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200) {
+//			if (strlen($response) > 3) {
+				$this->log("BWT Perla found");
 				$this->SetStatus(102); // BWT Perl found
 			} else {
+				$this->log("Other Device found");
 				$this->SetStatus(202); // No Device at IP
 			}
-			$this->log("Response: " . $response);
         	$this->log('SendHTTPCommand - End');
-			return json_decode(utf8_encode($response), true, 1000, JSON_INVALID_UTF8_IGNORE);
+			return json_decode(utf8_encode($body), true, 1000, JSON_INVALID_UTF8_IGNORE);
     	}
 
     	#================================================================================================
