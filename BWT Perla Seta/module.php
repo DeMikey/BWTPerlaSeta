@@ -222,7 +222,9 @@ declare(strict_types=1);
 					CURLOPT_RETURNTRANSFER => true,
 					CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
 					CURLOPT_USERPWD => $Username . ':' . $Password,
-					CURLOPT_TIMEOUT => 30
+					CURLOPT_TIMEOUT => 30,
+					CURLOPT_RETURNTRANSFER => 1,
+					CURLOPT_HEADER => 1
 				]);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				$response = curl_exec($ch);
@@ -257,9 +259,9 @@ declare(strict_types=1);
 			} else {
 				$this->SetStatus(202); // No Device at IP
 			}
-			$this->log("Response: ".$response);
+			$this->log("Response: " . $response);
         	$this->log('SendHTTPCommand - End');
-			return json_decode(utf8_encode($jsresponseon), true, 1000, JSON_INVALID_UTF8_IGNORE);
+			return json_decode(utf8_encode($response), true, 1000, JSON_INVALID_UTF8_IGNORE);
     	}
 
     	#================================================================================================
