@@ -71,7 +71,11 @@ declare(strict_types=1);
 				$this->log(print_r(array_keys($data),true));
 		
 				//--- Identification
-				$this->SetValue("ActiveErrorIDs", $data['ActiveErrorIDs']);
+				if ($data['ActiveErrorIDs'] === "") {
+					$this->SetValue("ActiveErrorIDs", 0);
+				} else {
+					$this->SetValue("ActiveErrorIDs", $data['ActiveErrorIDs']);
+				}
 				$this->SetValue("BlendedWaterSinceSetup_l", $data['BlendedWaterSinceSetup_l']);
 	
 				$this->SetValue("CapacityColumn1_ml_dH", $data['CapacityColumn1_ml_dH']);
@@ -228,13 +232,6 @@ declare(strict_types=1);
 				]);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				$response = curl_exec($ch);
-//				if (!$response = curl_exec($ch)) {
-//					$this->log((curl_error($ch)));
-//					$this->SetStatus(202); // No Device at IP
-//					$this->log('SendHTTPCommand - End');
-//					curl_close($ch);
-//					return false;
-//				}
 				curl_close($ch);
 				$this->log('Http Request finished');
 			} catch (Exception $e) {
@@ -256,7 +253,6 @@ declare(strict_types=1);
 			$this->log("Header: " . $header);
 			$this->log("Body: " . $body);
 			if (curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200) {
-//			if (strlen($response) > 3) {
 				$this->log("BWT Perla found");
 				$this->SetStatus(102); // BWT Perl found
 			} else {
@@ -276,7 +272,7 @@ declare(strict_types=1);
     	}
 
 		#================================================================================================
-		private function RegisterDailyStatisticVariables(int $Parent){
+		protected function RegisterDailyStatisticVariables(int $Parent){
 		#================================================================================================
 			for ($i = 0; $i <= 23; $i++) {
 				if ($i < 10) {
@@ -427,9 +423,9 @@ declare(strict_types=1);
 
 			//---- Variable für Archiv konfigurieren
 			$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
-			if (!AC_GetLoggingStatus ($archiveID, $this->GetIDForIdent("WaterConsumption"))) {
-				AC_SetLoggingStatus($archiveID, $this->GetIDForIdent("WaterConsumption"), true);
-				AC_SetAggregationType($archiveID, $this->GetIDForIdent("WaterConsumption"), 0);
+			if (!AC_GetLoggingStatus ($archiveID, $this->GetIDForIdent("WaterTreatedCurrentDay_l"))) {
+				AC_SetLoggingStatus($archiveID, $this->GetIDForIdent("WaterTreatedCurrentDay_l"), true);
+				AC_SetAggregationType($archiveID, $this->GetIDForIdent("WaterTreatedCurrentDay_l"), 1);
 			}
 
 			//---- Statistik
