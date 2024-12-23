@@ -56,17 +56,17 @@
         {
             "type":     "CheckBox",
             "name":     "DailyData",
-            "caption":  "ConsumptionDay"
+            "caption":  "WaterTreatedCurrentDay_l"
         },
         {
             "type":     "CheckBox",
             "name":     "MonthlyData",
-            "caption":  "ConsumptionMonth"
+            "caption":  "WaterTreatedCurrentMonth_l"
         },
         {
             "type":     "CheckBox",
             "name":     "YearlyData",
-            "caption":  "ConsumptionYear"
+            "caption":  "WaterTreatedCurrentYear_l"
         },
         {
             "type": "Label",
