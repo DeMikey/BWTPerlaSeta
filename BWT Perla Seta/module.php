@@ -12,7 +12,6 @@ declare(strict_types=1);
 			$this->RegisterPropertyString("Username", 'user');
 			$this->RegisterPropertyString("Password", '');
 			$this->RegisterPropertyBoolean("HTTPUpdateTimer", false);
-			$this->RegisterPropertyBoolean("UseCategory", false);
 			$this->RegisterPropertyBoolean("DailyData", false);
 			$this->RegisterPropertyBoolean("MonthlyData", false);
 			$this->RegisterPropertyBoolean("YearlyData", false);
