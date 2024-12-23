@@ -419,7 +419,6 @@ declare(strict_types=1);
 			$this->RegisterVariableInteger("WaterTreatedCurrentDay_l", $this->Translate("WaterTreatedCurrentDay_l"), "BWTPerla_Liter", 100);
 			$this->RegisterVariableInteger("WaterTreatedCurrentMonth_l", $this->Translate("WaterTreatedCurrentMonth_l"), "BWTPerla_Liter", 200);
 			$this->RegisterVariableInteger("WaterTreatedCurrentYear_l", $this->Translate("WaterTreatedCurrentYear_l"), "BWTPerla_Liter", 300);
-			$this->RegisterVariableInteger("WaterConsumption", $this->Translate("WaterConsumption"), "BWTPerla_Liter", 500);
 
 			//---- Variable für Archiv konfigurieren
 			$archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
